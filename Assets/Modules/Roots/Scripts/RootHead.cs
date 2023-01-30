@@ -1,3 +1,4 @@
+using Modules.Core;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
@@ -36,6 +37,7 @@ namespace Modules.Roots.Scripts
         {
             IsDied = true;
             _currentSegment.Die();
+            AliveService.Die(this);
         }
     }
 }

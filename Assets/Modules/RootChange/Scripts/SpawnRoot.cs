@@ -66,6 +66,7 @@ namespace Modules.RootChange.Scripts
             RootHead head = RootFactory.CreateRootHead();
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
+            AliveService.Spawn(head);
 
             if (!_isFirst)
                 RootFactory.CreateRootJoint(transform.position);
