@@ -161,4 +161,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _width: 2
-  _length: 4
+  _length: 2
+  _lengthReCheck: 2

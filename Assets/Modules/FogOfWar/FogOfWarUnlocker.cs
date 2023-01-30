@@ -7,6 +7,7 @@ namespace Modules.FogOfWar
         [SerializeField] private LayerMask _fogLayer;
         [SerializeField] private float _width = 1f;
         [SerializeField] private float _length = 1f;
+        [SerializeField] private int _lengthReCheck = 2;
 
         private Mesh _mesh;
         private Color[] _colors;
@@ -41,13 +42,13 @@ namespace Modules.FogOfWar
                     _colors = _mesh.colors;
                 }
 
-                for (int i = 0; i < _vertices.Length; i++)
+                for (var i = 0; i < _vertices.Length; i++)
                 {
-                    Vector3 v = _lastFoWPlane.transform.TransformPoint(_vertices[i]);
+                    Vector3 v = _lastFoWPlane.transform.TransformPoint(_vertices[i]) - hit.point;
 
-                    for (int j = 0; j < _length; j++)
+                    for (float j = 0; j < _lengthReCheck; j++)
                     {
-                        float dist = Vector3.SqrMagnitude(v - hit.point - transform.right * j) - 2;
+                        float dist = Vector3.SqrMagnitude(v - transform.right * _length * j) - 2;
                         if (dist < 0) dist = 0;
                         if (dist < RadiusSqr)
                         {
