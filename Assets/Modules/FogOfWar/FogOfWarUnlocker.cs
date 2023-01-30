@@ -5,14 +5,15 @@ namespace Modules.FogOfWar
     public class FogOfWarUnlocker : MonoBehaviour
     {
         [SerializeField] private LayerMask _fogLayer;
-        [SerializeField] private float _radius = 1f;
+        [SerializeField] private float _width = 1f;
+        [SerializeField] private float _length = 1f;
 
         private Mesh _mesh;
         private Color[] _colors;
         private Vector3[] _vertices;
         private Transform _lastFoWPlane;
-        private float RadiusSqr => _radius * _radius;
 
+        private float RadiusSqr => _width * _width;
 
         private void Update()
         {
@@ -39,18 +40,20 @@ namespace Modules.FogOfWar
                 {
                     _colors = _mesh.colors;
                 }
-                
 
                 for (int i = 0; i < _vertices.Length; i++)
                 {
                     Vector3 v = _lastFoWPlane.transform.TransformPoint(_vertices[i]);
-                    
-                    float dist = Vector3.SqrMagnitude(v - hit.point) - 2;
-                    if (dist < 0) dist = 0;
-                    if (dist < RadiusSqr)
+
+                    for (int j = 0; j < _length; j++)
                     {
-                        float alpha = Mathf.Min(_colors[i].a, dist / RadiusSqr);
-                        _colors[i].a = alpha < 0.9f ? 0 : alpha;
+                        float dist = Vector3.SqrMagnitude(v - hit.point - transform.right * j) - 2;
+                        if (dist < 0) dist = 0;
+                        if (dist < RadiusSqr)
+                        {
+                            float alpha = Mathf.Min(_colors[i].a, dist / RadiusSqr);
+                            _colors[i].a = alpha < 0.9f ? 0 : alpha;
+                        }
                     }
                 }
                 _mesh.colors = _colors;
