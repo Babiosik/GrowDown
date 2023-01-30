@@ -4,18 +4,18 @@ using Modules.Singletones.Factories;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Modules.SpawnRoot.Scripts
+namespace Modules.RootChange.Scripts
 {
-    public class SpawnRoot : MonoBehaviour
+    public class ChangeDirectionRoot : MonoBehaviour
     {
         private const float AngleMultiple = -6;
 
         [SerializeField] private GameObject[] _angleLines = new GameObject[3];
         [SerializeField] private float _rotationStart;
         [SerializeField] private float _rotationEnd;
-        [SerializeField] private bool _isFirst = false;
 
         private InputSystem _inputSystem;
+        private RootHead _selectedHead;
         private bool _isActive = false;
         private Camera _camera;
 
@@ -25,7 +25,6 @@ namespace Modules.SpawnRoot.Scripts
             _inputSystem = InputService.InputSystem;
 
             SetActive(false);
-            if (_isFirst) Triggered();
         }
 
         private void Update()
@@ -41,11 +40,13 @@ namespace Modules.SpawnRoot.Scripts
             _angleLines[2].transform.localRotation = Quaternion.Euler(0, 0, angle);
         }
 
-        private void Triggered()
+        public void Triggered(RootHead rootHead)
         {
             if (!InputService.AllowControl) return;
             
             SetActive(true);
+            _selectedHead = rootHead;
+            transform.position = _selectedHead.transform.position;
             _angleLines[0].transform.localRotation = Quaternion.Euler(0, 0, _rotationStart);
             _angleLines[1].transform.localRotation = Quaternion.Euler(0, 0, _rotationEnd);
 
@@ -53,17 +54,17 @@ namespace Modules.SpawnRoot.Scripts
             _inputSystem.All.MouseLeftButton.performed += OnApply;
         }
 
-        private void OnApply(InputAction.CallbackContext obj)
+        protected void OnApply(InputAction.CallbackContext obj)
         {
             _inputSystem.All.MouseLeftButton.performed -= OnApply;
             InputService.AllowControl = true;
 
             SetActive(false);
-            RootHead head = RootFactory.CreateRootHead();
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
+            RootFactory.CreateRootJoint(_selectedHead.transform.position);
             
-            segment.Init(head, transform.position, _angleLines[2].transform.rotation);
+            segment.Init(_selectedHead, transform.position, _angleLines[2].transform.rotation);
         }
 
         private void SetActive(bool active)

@@ -1,6 +1,6 @@
 using Modules.Core;
+using Modules.RootChange.Scripts;
 using Modules.Roots.Scripts;
-using Modules.SpawnRoot.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +9,7 @@ namespace Modules.CameraScripts
     public class CameraClicker : MonoBehaviour
     {
         [SerializeField] private ChangeDirectionRoot _changeDirectionRoot;
+        [SerializeField] private SpawnRoot _spawnRoot;
         [SerializeField] private LayerMask _layerMask;
         
         private InputSystem _inputSystem;
@@ -46,6 +47,7 @@ namespace Modules.CameraScripts
                 return;
             
             if (TryRootHead(hit.transform)) return;
+            if (TryRootSegment(hit.transform, hit.point)) return;
         }
 
         private bool TryRootHead(Transform obj)
@@ -55,6 +57,17 @@ namespace Modules.CameraScripts
             
             rootHead.SetPauseGross(true);
             _changeDirectionRoot.Triggered(rootHead);           
+            
+            return true;
+        }
+        
+        private bool TryRootSegment(Transform obj, Vector3 mouseWorldPos)
+        {
+            var rootSegment = obj.parent.parent.GetComponent<RootSegment>();
+            if (rootSegment == null) return false;
+
+            _spawnRoot.transform.position = mouseWorldPos;
+            _spawnRoot.Triggered(rootSegment);
             
             return true;
         }

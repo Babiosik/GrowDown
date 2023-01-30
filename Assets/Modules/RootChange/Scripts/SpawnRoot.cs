@@ -4,18 +4,19 @@ using Modules.Singletones.Factories;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Modules.SpawnRoot.Scripts
+namespace Modules.RootChange.Scripts
 {
-    public class ChangeDirectionRoot : MonoBehaviour
+    public class SpawnRoot : MonoBehaviour
     {
         private const float AngleMultiple = -6;
 
         [SerializeField] private GameObject[] _angleLines = new GameObject[3];
         [SerializeField] private float _rotationStart;
         [SerializeField] private float _rotationEnd;
+        [SerializeField] private bool _isFirst = false;
 
+        private RootSegment _selectedSegment;
         private InputSystem _inputSystem;
-        private RootHead _selectedHead;
         private bool _isActive = false;
         private Camera _camera;
 
@@ -25,6 +26,7 @@ namespace Modules.SpawnRoot.Scripts
             _inputSystem = InputService.InputSystem;
 
             SetActive(false);
+            if (_isFirst) Triggered(null);
         }
 
         private void Update()
@@ -40,13 +42,14 @@ namespace Modules.SpawnRoot.Scripts
             _angleLines[2].transform.localRotation = Quaternion.Euler(0, 0, angle);
         }
 
-        public void Triggered(RootHead rootHead)
+        public void Triggered(RootSegment rootSegment)
         {
             if (!InputService.AllowControl) return;
+            if (!_isFirst && rootSegment == null) return;
             
+            _selectedSegment = rootSegment;
+
             SetActive(true);
-            _selectedHead = rootHead;
-            transform.position = _selectedHead.transform.position;
             _angleLines[0].transform.localRotation = Quaternion.Euler(0, 0, _rotationStart);
             _angleLines[1].transform.localRotation = Quaternion.Euler(0, 0, _rotationEnd);
 
@@ -54,17 +57,20 @@ namespace Modules.SpawnRoot.Scripts
             _inputSystem.All.MouseLeftButton.performed += OnApply;
         }
 
-        protected void OnApply(InputAction.CallbackContext obj)
+        private void OnApply(InputAction.CallbackContext obj)
         {
             _inputSystem.All.MouseLeftButton.performed -= OnApply;
             InputService.AllowControl = true;
 
             SetActive(false);
+            RootHead head = RootFactory.CreateRootHead();
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
-            RootFactory.CreateRootJoint(_selectedHead.transform.position);
+
+            if (!_isFirst)
+                RootFactory.CreateRootJoint(transform.position);
             
-            segment.Init(_selectedHead, transform.position, _angleLines[2].transform.rotation);
+            segment.Init(head, transform.position, _angleLines[2].transform.rotation);
         }
 
         private void SetActive(bool active)

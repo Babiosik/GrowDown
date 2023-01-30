@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 5326782280324936876}
   - component: {fileID: 5326782280324936877}
   - component: {fileID: 5326782280324936878}
+  - component: {fileID: 4133148844579225929}
   m_Layer: 0
   m_Name: RootMesh4
   m_TagString: Untagged
@@ -240,6 +241,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!64 &4133148844579225929
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326782280324936875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5873316706964059540
 GameObject:
   m_ObjectHideFlags: 0

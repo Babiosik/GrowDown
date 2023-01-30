@@ -19,6 +19,8 @@ namespace Modules.Roots.Scripts
 
         private bool _isPause = true;
 
+        public Vector3 GetHeadPosition => _rootHead.transform.GetChild(0).position;
+
         private void Start()
         {
             // _rootSegmentPrefab.name = _rootSegmentPrefab.name.Replace("(Clone)", "");

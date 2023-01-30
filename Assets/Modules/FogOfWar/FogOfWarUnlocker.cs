@@ -35,6 +35,11 @@ namespace Modules.FogOfWar
                             _colors[i] = Color.white;
                     }
                 }
+                else
+                {
+                    _colors = _mesh.colors;
+                }
+                
 
                 for (int i = 0; i < _vertices.Length; i++)
                 {
