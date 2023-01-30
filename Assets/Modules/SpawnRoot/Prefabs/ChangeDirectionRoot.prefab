@@ -51,8 +51,8 @@ MonoBehaviour:
   - {fileID: 5203048913334358186}
   - {fileID: 4098405525708141416}
   - {fileID: 2763350652426659104}
-  _rotationStart: -90
-  _rotationEnd: 90
+  _rotationStart: -70
+  _rotationEnd: 70
 --- !u!1001 &3266254852989250298
 PrefabInstance:
   m_ObjectHideFlags: 0
