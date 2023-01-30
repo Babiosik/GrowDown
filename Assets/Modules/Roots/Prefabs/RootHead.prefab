@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1964738033910816247}
   - component: {fileID: 1964738033910816240}
   - component: {fileID: 790655097686688049}
+  - component: {fileID: 3255464518446440341}
   - component: {fileID: 6855225511588664401}
   m_Layer: 0
   m_Name: RootHeadMesh
@@ -96,8 +97,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.9, z: 0.1}
-  m_Center: {x: -0.1, y: 0, z: 0}
+  m_Size: {x: 0.31, y: 0.84, z: 0.1}
+  m_Center: {x: -0.34, y: 0, z: 0}
+--- !u!65 &3255464518446440341
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964738033910816243}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37, y: 0.42, z: 0.1}
+  m_Center: {x: -0.01, y: 0, z: 0}
 --- !u!54 &6855225511588664401
 Rigidbody:
   m_ObjectHideFlags: 0
