@@ -1,4 +1,5 @@
 using Modules.Singletones.Factories;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
@@ -18,6 +19,8 @@ namespace Modules.Roots.Scripts
         private RootSegment _nextSegment;
 
         private bool _isPause = true;
+        
+        public bool IsDied { get; private set; } = false;
 
         public Vector3 GetHeadPosition => _rootHead.transform.GetChild(0).position;
 
@@ -38,8 +41,9 @@ namespace Modules.Roots.Scripts
             if (_percentGross >= 1) Clone();
         }
 
-        public void Init(RootHead head, Vector3 position, Quaternion rotation)
+        public void Init(RootSegment prev, RootHead head, Vector3 position, Quaternion rotation)
         {
+            _prevSegment = prev;
             transform.position = position;
             transform.rotation = rotation;
             _endPoint = transform.position + transform.right * _rootSegmentMesh.Size.x;
@@ -60,15 +64,23 @@ namespace Modules.Roots.Scripts
             _rootSegmentMesh = mesh;
 
         public void SetPauseGross(bool pause) =>
-            _isPause = pause;
+            _isPause = pause || IsDied;
         
+        public void Die()
+        {
+            _isPause = true;
+            IsDied = true;
+            if (_prevSegment != null)
+                _prevSegment.Die();
+        }
+
         private void Clone()
         {
             _isPause = true;
             _nextSegment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(_nextSegment);
             
-            _nextSegment.Init(_rootHead, _endPoint, transform.rotation);
+            _nextSegment.Init(this, _rootHead, _endPoint, transform.rotation);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Modules.RootChange.Scripts
             RootFactory.CreateRootSegmentMesh(segment);
             RootFactory.CreateRootJoint(_selectedHead.transform.position);
             
-            segment.Init(_selectedHead, transform.position, _angleLines[2].transform.rotation);
+            segment.Init(_selectedHead.GetCurrentSegment, _selectedHead, transform.position, _angleLines[2].transform.rotation);
         }
 
         private void SetActive(bool active)

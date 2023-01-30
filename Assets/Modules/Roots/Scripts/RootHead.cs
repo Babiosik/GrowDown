@@ -10,6 +10,9 @@ namespace Modules.Roots.Scripts
         private Vector3 _start;
         private Vector3 _end;
 
+        public bool IsDied { get; private set; } = false;
+        public RootSegment GetCurrentSegment => _currentSegment;
+
         public void SetSegment(RootSegment segment, Vector3 start, Vector3 end, float rotation)
         {
             _currentSegment = segment;
@@ -28,5 +31,11 @@ namespace Modules.Roots.Scripts
 
         public void SetPauseGross(bool pause) =>
             _currentSegment.SetPauseGross(pause);
+        
+        public void Die()
+        {
+            IsDied = true;
+            _currentSegment.Die();
+        }
     }
 }
