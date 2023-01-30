@@ -9,6 +9,7 @@ namespace Modules.CameraScripts
     public class CameraClicker : MonoBehaviour
     {
         [SerializeField] private ChangeDirectionRoot _changeDirectionRoot;
+        [SerializeField] private LayerMask _layerMask;
         
         private InputSystem _inputSystem;
         private Camera _camera;
@@ -17,10 +18,14 @@ namespace Modules.CameraScripts
         {
             _inputSystem = InputService.InputSystem;
             _camera = Camera.main;
+            
+            _inputSystem.All.MouseLeftButton.performed += OnMouseClick;
         }
 
         private void OnEnable()
         {
+            if (_inputSystem == null) return;
+            
             _inputSystem.All.MouseLeftButton.performed += OnMouseClick;
         }
 
@@ -37,7 +42,7 @@ namespace Modules.CameraScripts
             Ray ray = _camera.ScreenPointToRay(mousePos);
             RaycastHit hit;
 
-            if (!Physics.Raycast(ray, out hit, 100))
+            if (!Physics.Raycast(ray, out hit, 100, _layerMask))
                 return;
             
             if (TryRootHead(hit.transform)) return;
@@ -45,10 +50,11 @@ namespace Modules.CameraScripts
 
         private bool TryRootHead(Transform obj)
         {
-            var rootHead = obj.GetComponent<RootHead>();
+            var rootHead = obj.parent.GetComponent<RootHead>();
             if (rootHead == null) return false;
             
-            _changeDirectionRoot.Triggered(rootHead);            
+            rootHead.SetPauseGross(true);
+            _changeDirectionRoot.Triggered(rootHead);           
             
             return true;
         }

@@ -5,12 +5,14 @@ namespace Modules.Roots.Scripts
     public class RootHead : MonoBehaviour
     {
         [SerializeField] private Transform _meshTransform;
+        private RootSegment _currentSegment;
         private Vector3 _localMeshPosition;
         private Vector3 _start;
         private Vector3 _end;
 
-        public void SetSegment(Vector3 start, Vector3 end, float rotation)
+        public void SetSegment(RootSegment segment, Vector3 start, Vector3 end, float rotation)
         {
+            _currentSegment = segment;
             _localMeshPosition = _meshTransform.localPosition;
             _start = start;
             _end = end;
@@ -23,5 +25,8 @@ namespace Modules.Roots.Scripts
             _localMeshPosition.y = Mathf.Lerp(_localMeshPosition.y, offsetY, 0.5f);
             _meshTransform.localPosition = _localMeshPosition;
         }
+
+        public void SetPauseGross(bool pause) =>
+            _currentSegment.SetPauseGross(pause);
     }
 }

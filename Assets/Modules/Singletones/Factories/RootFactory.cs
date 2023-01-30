@@ -67,9 +67,9 @@ namespace Modules.Singletones.Factories
         private RootJoint CreateRootJointInternal(Vector3 position)
         {
             var joint = Instantiate(
-                _rootSegment,
+                _rootJoint,
                 position,
-                Random.rotation
+                Quaternion.Euler(0,0,Random.value * 360)
             ).GetComponent<RootJoint>();
             
             return joint;

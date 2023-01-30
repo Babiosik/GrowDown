@@ -15,6 +15,7 @@ namespace Modules.SpawnRoot.Scripts
         [SerializeField] private float _rotationEnd;
 
         private InputSystem _inputSystem;
+        private RootHead _selectedHead;
         private bool _isActive = false;
         private Camera _camera;
 
@@ -44,6 +45,8 @@ namespace Modules.SpawnRoot.Scripts
             if (!InputService.AllowControl) return;
             
             SetActive(true);
+            _selectedHead = rootHead;
+            transform.position = _selectedHead.transform.position;
             _angleLines[0].transform.localRotation = Quaternion.Euler(0, 0, _rotationStart);
             _angleLines[1].transform.localRotation = Quaternion.Euler(0, 0, _rotationEnd);
 
@@ -57,11 +60,11 @@ namespace Modules.SpawnRoot.Scripts
             InputService.AllowControl = true;
 
             SetActive(false);
-            RootHead head = RootFactory.CreateRootHead();
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
+            RootFactory.CreateRootJoint(_selectedHead.transform.position);
             
-            segment.Init(head, transform.position, _angleLines[2].transform.rotation);
+            segment.Init(_selectedHead, transform.position, _angleLines[2].transform.rotation);
         }
 
         private void SetActive(bool active)

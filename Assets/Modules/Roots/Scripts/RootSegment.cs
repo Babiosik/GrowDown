@@ -44,6 +44,7 @@ namespace Modules.Roots.Scripts
 
             _rootHead = head;
             _rootHead.SetSegment(
+                this,
                 transform.position,
                 _endPoint,
                 transform.rotation.eulerAngles.z
@@ -56,6 +57,9 @@ namespace Modules.Roots.Scripts
         public void SetMesh(RootSegmentMesh mesh) =>
             _rootSegmentMesh = mesh;
 
+        public void SetPauseGross(bool pause) =>
+            _isPause = pause;
+        
         private void Clone()
         {
             _isPause = true;
