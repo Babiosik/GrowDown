@@ -70,7 +70,7 @@ namespace Modules.RootChange.Scripts
             if (!_isFirst)
                 RootFactory.CreateRootJoint(transform.position);
             
-            segment.Init(_selectedSegment, head, transform.position, _angleLines[2].transform.rotation);
+            segment.Init(null, head, transform.position, _angleLines[2].transform.rotation);
         }
 
         private void SetActive(bool active)
