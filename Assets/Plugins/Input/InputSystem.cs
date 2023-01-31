@@ -37,7 +37,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MousePosition"",
+                    ""name"": ""CoursorPosition"",
                     ""type"": ""Value"",
                     ""id"": ""6e0dc99b-855d-48f6-a512-6fbc25dd8206"",
                     ""expectedControlType"": ""Vector2"",
@@ -46,13 +46,31 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MouseLeftButton"",
+                    ""name"": ""DoButton"",
                     ""type"": ""Button"",
                     ""id"": ""fc94b0ec-8c78-43ea-8385-f160801ba7cc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""489b645d-58b6-498f-90e3-6c4d06d4dd89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""08804e7b-5bb7-4346-be2c-01ac6d5eb0d2"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -118,7 +136,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MousePosition"",
+                    ""action"": ""CoursorPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -129,7 +147,29 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MouseLeftButton"",
+                    ""action"": ""DoButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""529492e8-558f-4a34-86ff-f90e1f4cdccc"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f955c5a2-543d-4105-a82d-ec4c0060080e"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -141,8 +181,10 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         // All
         m_All = asset.FindActionMap("All", throwIfNotFound: true);
         m_All_Move = m_All.FindAction("Move", throwIfNotFound: true);
-        m_All_MousePosition = m_All.FindAction("MousePosition", throwIfNotFound: true);
-        m_All_MouseLeftButton = m_All.FindAction("MouseLeftButton", throwIfNotFound: true);
+        m_All_CoursorPosition = m_All.FindAction("CoursorPosition", throwIfNotFound: true);
+        m_All_DoButton = m_All.FindAction("DoButton", throwIfNotFound: true);
+        m_All_CancelButton = m_All.FindAction("CancelButton", throwIfNotFound: true);
+        m_All_Zoom = m_All.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -203,15 +245,19 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_All;
     private IAllActions m_AllActionsCallbackInterface;
     private readonly InputAction m_All_Move;
-    private readonly InputAction m_All_MousePosition;
-    private readonly InputAction m_All_MouseLeftButton;
+    private readonly InputAction m_All_CoursorPosition;
+    private readonly InputAction m_All_DoButton;
+    private readonly InputAction m_All_CancelButton;
+    private readonly InputAction m_All_Zoom;
     public struct AllActions
     {
         private @InputSystem m_Wrapper;
         public AllActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_All_Move;
-        public InputAction @MousePosition => m_Wrapper.m_All_MousePosition;
-        public InputAction @MouseLeftButton => m_Wrapper.m_All_MouseLeftButton;
+        public InputAction @CoursorPosition => m_Wrapper.m_All_CoursorPosition;
+        public InputAction @DoButton => m_Wrapper.m_All_DoButton;
+        public InputAction @CancelButton => m_Wrapper.m_All_CancelButton;
+        public InputAction @Zoom => m_Wrapper.m_All_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_All; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -224,12 +270,18 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_AllActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_AllActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_AllActionsCallbackInterface.OnMove;
-                @MousePosition.started -= m_Wrapper.m_AllActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_AllActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_AllActionsCallbackInterface.OnMousePosition;
-                @MouseLeftButton.started -= m_Wrapper.m_AllActionsCallbackInterface.OnMouseLeftButton;
-                @MouseLeftButton.performed -= m_Wrapper.m_AllActionsCallbackInterface.OnMouseLeftButton;
-                @MouseLeftButton.canceled -= m_Wrapper.m_AllActionsCallbackInterface.OnMouseLeftButton;
+                @CoursorPosition.started -= m_Wrapper.m_AllActionsCallbackInterface.OnCoursorPosition;
+                @CoursorPosition.performed -= m_Wrapper.m_AllActionsCallbackInterface.OnCoursorPosition;
+                @CoursorPosition.canceled -= m_Wrapper.m_AllActionsCallbackInterface.OnCoursorPosition;
+                @DoButton.started -= m_Wrapper.m_AllActionsCallbackInterface.OnDoButton;
+                @DoButton.performed -= m_Wrapper.m_AllActionsCallbackInterface.OnDoButton;
+                @DoButton.canceled -= m_Wrapper.m_AllActionsCallbackInterface.OnDoButton;
+                @CancelButton.started -= m_Wrapper.m_AllActionsCallbackInterface.OnCancelButton;
+                @CancelButton.performed -= m_Wrapper.m_AllActionsCallbackInterface.OnCancelButton;
+                @CancelButton.canceled -= m_Wrapper.m_AllActionsCallbackInterface.OnCancelButton;
+                @Zoom.started -= m_Wrapper.m_AllActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_AllActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_AllActionsCallbackInterface.OnZoom;
             }
             m_Wrapper.m_AllActionsCallbackInterface = instance;
             if (instance != null)
@@ -237,12 +289,18 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
-                @MouseLeftButton.started += instance.OnMouseLeftButton;
-                @MouseLeftButton.performed += instance.OnMouseLeftButton;
-                @MouseLeftButton.canceled += instance.OnMouseLeftButton;
+                @CoursorPosition.started += instance.OnCoursorPosition;
+                @CoursorPosition.performed += instance.OnCoursorPosition;
+                @CoursorPosition.canceled += instance.OnCoursorPosition;
+                @DoButton.started += instance.OnDoButton;
+                @DoButton.performed += instance.OnDoButton;
+                @DoButton.canceled += instance.OnDoButton;
+                @CancelButton.started += instance.OnCancelButton;
+                @CancelButton.performed += instance.OnCancelButton;
+                @CancelButton.canceled += instance.OnCancelButton;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
         }
     }
@@ -250,7 +308,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     public interface IAllActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
-        void OnMouseLeftButton(InputAction.CallbackContext context);
+        void OnCoursorPosition(InputAction.CallbackContext context);
+        void OnDoButton(InputAction.CallbackContext context);
+        void OnCancelButton(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }

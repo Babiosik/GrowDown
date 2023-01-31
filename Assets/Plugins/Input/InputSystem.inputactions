@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MousePosition",
+                    "name": "CoursorPosition",
                     "type": "Value",
                     "id": "6e0dc99b-855d-48f6-a512-6fbc25dd8206",
                     "expectedControlType": "Vector2",
@@ -24,13 +24,31 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseLeftButton",
+                    "name": "DoButton",
                     "type": "Button",
                     "id": "fc94b0ec-8c78-43ea-8385-f160801ba7cc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CancelButton",
+                    "type": "Button",
+                    "id": "489b645d-58b6-498f-90e3-6c4d06d4dd89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "08804e7b-5bb7-4346-be2c-01ac6d5eb0d2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -96,7 +114,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MousePosition",
+                    "action": "CoursorPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -107,7 +125,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseLeftButton",
+                    "action": "DoButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "529492e8-558f-4a34-86ff-f90e1f4cdccc",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f955c5a2-543d-4105-a82d-ec4c0060080e",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

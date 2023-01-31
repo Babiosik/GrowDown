@@ -20,26 +20,26 @@ namespace Modules.CameraScripts
             _inputSystem = InputService.InputSystem;
             _camera = Camera.main;
             
-            _inputSystem.All.MouseLeftButton.performed += OnMouseClick;
+            _inputSystem.All.DoButton.performed += OnMouseClick;
         }
 
         private void OnEnable()
         {
             if (_inputSystem == null) return;
             
-            _inputSystem.All.MouseLeftButton.performed += OnMouseClick;
+            _inputSystem.All.DoButton.performed += OnMouseClick;
         }
 
         private void OnDisable()
         {
-            _inputSystem.All.MouseLeftButton.performed -= OnMouseClick;
+            _inputSystem.All.DoButton.performed -= OnMouseClick;
         }
         
         private void OnMouseClick(InputAction.CallbackContext obj)
         {
             if (!InputService.AllowControl) return;
 
-            var mousePos = _inputSystem.All.MousePosition.ReadValue<Vector2>();
+            var mousePos = _inputSystem.All.CoursorPosition.ReadValue<Vector2>();
             Ray ray = _camera.ScreenPointToRay(mousePos);
             RaycastHit hit;
 

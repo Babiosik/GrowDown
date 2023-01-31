@@ -33,7 +33,7 @@ namespace Modules.RootChange.Scripts
         {
             if (!_isActive) return;
 
-            var positionMouse = _inputSystem.All.MousePosition.ReadValue<Vector2>();
+            var positionMouse = _inputSystem.All.CoursorPosition.ReadValue<Vector2>();
             Vector3 worldMouse = _camera.ScreenToWorldPoint(positionMouse);
             Quaternion rotation = Quaternion.LookRotation(transform.position - worldMouse);
             float angle = rotation.eulerAngles.y;
@@ -54,12 +54,12 @@ namespace Modules.RootChange.Scripts
             _angleLines[1].transform.localRotation = Quaternion.Euler(0, 0, _rotationEnd);
 
             InputService.AllowControl = false;
-            _inputSystem.All.MouseLeftButton.performed += OnApply;
+            _inputSystem.All.DoButton.performed += OnApply;
         }
 
         private void OnApply(InputAction.CallbackContext obj)
         {
-            _inputSystem.All.MouseLeftButton.performed -= OnApply;
+            _inputSystem.All.DoButton.performed -= OnApply;
             InputService.AllowControl = true;
 
             SetActive(false);
