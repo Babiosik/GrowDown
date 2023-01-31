@@ -58,7 +58,6 @@ namespace Modules.CameraScripts
             if (rootHead == null) return false;
             if (rootHead.IsDied) return true;
             
-            rootHead.SetPauseGross(true);
             _changeDirectionRoot.Triggered(rootHead);           
             
             return true;

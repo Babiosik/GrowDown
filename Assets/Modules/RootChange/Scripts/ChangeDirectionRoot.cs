@@ -46,16 +46,29 @@ namespace Modules.RootChange.Scripts
             
             SetActive(true);
             _selectedHead = rootHead;
+            _selectedHead.SetPauseGross(true);
             transform.position = _selectedHead.transform.position;
             _angleLines[0].transform.localRotation = Quaternion.Euler(0, 0, _rotationStart);
             _angleLines[1].transform.localRotation = Quaternion.Euler(0, 0, _rotationEnd);
 
             InputService.AllowControl = false;
             _inputSystem.All.DoButton.performed += OnApply;
+            _inputSystem.All.CancelButton.performed += OnCancel;
+        }
+
+        private void OnCancel(InputAction.CallbackContext callbackContext)
+        {
+            _inputSystem.All.CancelButton.performed -= OnCancel;
+            _inputSystem.All.DoButton.performed -= OnApply;
+            InputService.AllowControl = true;
+
+            SetActive(false);
+            _selectedHead.SetPauseGross(false);
         }
 
         private void OnApply(InputAction.CallbackContext obj)
         {
+            _inputSystem.All.CancelButton.performed -= OnCancel;
             _inputSystem.All.DoButton.performed -= OnApply;
             InputService.AllowControl = true;
 

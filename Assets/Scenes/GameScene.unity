@@ -709,6 +709,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5727811854129792264, guid: e821c1c6443461649a4f37b4bbf5d4a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8688836178567171136, guid: e821c1c6443461649a4f37b4bbf5d4a0, type: 3}
       propertyPath: m_Name
       value: SpawnRoot
@@ -1017,7 +1021,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321878317
 GameObject:
@@ -1274,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3266254852834940887, guid: 2c9dcd5e9aec03a49aecca43b714dd59, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3266254852834940887, guid: 2c9dcd5e9aec03a49aecca43b714dd59, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1315,6 +1319,10 @@ PrefabInstance:
     - target: {fileID: 3266254852834940887, guid: 2c9dcd5e9aec03a49aecca43b714dd59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545906518580593792, guid: 2c9dcd5e9aec03a49aecca43b714dd59, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8819462955111411127, guid: 2c9dcd5e9aec03a49aecca43b714dd59, type: 3}
       propertyPath: _rotationEnd
@@ -1954,6 +1962,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5727811854129792264, guid: e821c1c6443461649a4f37b4bbf5d4a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8688836178567171136, guid: e821c1c6443461649a4f37b4bbf5d4a0, type: 3}
       propertyPath: m_Name
       value: SpawnRootStart
