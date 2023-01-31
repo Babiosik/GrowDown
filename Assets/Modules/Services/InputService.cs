@@ -1,32 +1,37 @@
 namespace Modules.Services
 {
-    static public class InputService
+    public class InputService
     {
-        private static InputSystem _inputSystem;
-        private static bool _allowControl = true;
+        #region Static
 
-        static public InputSystem InputSystem
-        {
-            get
-            {
-                if (_inputSystem != null)
-                    return _inputSystem;
-                
-                _inputSystem = new InputSystem();
-                _inputSystem.Enable();
-                return _inputSystem;
-            }
-        }
+        private static InputService Inst => _self ??= new InputService();
+        private static InputService _self;
 
+        static public InputSystem InputSystem => Inst._inputSystem;
         static public bool AllowControl
         {
-            get => _allowControl;
-            set
-            {
-                if (!_allowControl && !value) return;
-
-                _allowControl = value;
-            }
+            get => Inst._allowControl;
+            set => Inst.SetAllowControl(value);
         }
+
+        #endregion
+        #region Instance
+
+        private readonly InputSystem _inputSystem;
+        private bool _allowControl = true;
+
+        private InputService()
+        {
+            _inputSystem = new InputSystem();
+            _inputSystem.Enable();
+        }
+
+        private void SetAllowControl(bool value)
+        {
+            if (!_allowControl && !value) return;
+            _allowControl = value;
+        }
+
+        #endregion
     }
 }

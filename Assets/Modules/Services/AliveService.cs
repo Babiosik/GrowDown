@@ -5,22 +5,37 @@ using UnityEngine;
 
 namespace Modules.Services
 {
-    static public class AliveService
+    public class AliveService
     {
-        static public event Action OnDied;
+        #region Static
         
-        private readonly static List<RootHead> AliveHeads = new List<RootHead>();
-
+        private static AliveService Inst => _self ??= new AliveService();
+        private static AliveService _self;
+        
+        static public event Action OnDied;
         static public void Spawn(RootHead rootHead) =>
-            AliveHeads.Add(rootHead);
-
-        static public void Die(RootHead rootHead) 
+            Inst.AddHead(rootHead);
+        
+        static public void Die(RootHead rootHead) =>
+            Inst.RemoveHead(rootHead);
+        
+        #endregion
+        #region Instance
+        
+        private readonly List<RootHead> _aliveHeads = new List<RootHead>();
+        
+        private void AddHead(RootHead rootHead) =>
+            _aliveHeads.Add(rootHead);
+        
+        private void RemoveHead(RootHead rootHead)
         {
-            AliveHeads.Remove(rootHead);
-            if (AliveHeads.Count > 0) return;
-
+            _aliveHeads.Remove(rootHead);
+            if (_aliveHeads.Count > 0) return;
+        
             OnDied?.Invoke();
             Debug.Log("Die");
         }
+        
+        #endregion
     }
 }

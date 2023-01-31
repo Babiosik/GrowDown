@@ -45,13 +45,15 @@ namespace Modules.CameraScripts
 
             if (!Physics.Raycast(ray, out hit, 100, _layerMask))
                 return;
-            
+
             if (TryRootHead(hit.transform)) return;
             if (TryRootSegment(hit.transform, hit.point)) return;
         }
 
         private bool TryRootHead(Transform obj)
         {
+            if (!obj.CompareTag("RootHead")) return false;
+            
             var rootHead = obj.parent.GetComponent<RootHead>();
             if (rootHead == null) return false;
             if (rootHead.IsDied) return true;
@@ -64,6 +66,8 @@ namespace Modules.CameraScripts
         
         private bool TryRootSegment(Transform obj, Vector3 mouseWorldPos)
         {
+            if (!obj.CompareTag("RootSegment")) return false;
+            
             var rootSegment = obj.parent.parent.GetComponent<RootSegment>();
             if (rootSegment == null) return false;
             if (rootSegment.IsDied) return true;

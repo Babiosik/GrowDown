@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5326782280324936878}
   m_Layer: 0
   m_Name: RootMesh1
-  m_TagString: Untagged
+  m_TagString: RootSegment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
