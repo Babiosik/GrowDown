@@ -7,6 +7,7 @@ namespace Modules.Roots.Scripts
     {
         [SerializeField] private Transform[] _pathPoints;
         [SerializeField] private AnimationCurve _pathPositionOffset;
+        [SerializeField] private Texture _diedTexture;
 
         private Vector2 _uv;
         private Vector3 _size;
@@ -14,6 +15,7 @@ namespace Modules.Roots.Scripts
         private Vector3 _position;
         private Material _localMaterial;
         private MeshRenderer _meshRenderer;
+        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
 
         public Vector3 Size => _size;
         public float GetHeadPositionOffset => _pathPositionOffset.Evaluate(_scale.x);
@@ -58,6 +60,11 @@ namespace Modules.Roots.Scripts
                 _localMaterial.mainTextureScale = _uv;
             transform.localScale = _scale;
             transform.localPosition = _position;
+        }
+
+        public void Die()
+        {
+            _meshRenderer.material.SetTexture(MainTex, _diedTexture);
         }
 
         private void SetClonedMaterial()

@@ -3,13 +3,15 @@ using UnityEngine;
 
 namespace Modules.Roots.Scripts
 {
-    public class RootHead : MonoBehaviour
+    public class RootHead : MonoBehaviour, IRootSegment
     {
         [SerializeField] private Transform _meshTransform;
+        [SerializeField] private Texture _diedTexture;
         private RootSegment _currentSegment;
         private Vector3 _localMeshPosition;
         private Vector3 _start;
         private Vector3 _end;
+        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
 
         public bool IsDied { get; private set; } = false;
         public RootSegment GetCurrentSegment => _currentSegment;
@@ -38,6 +40,7 @@ namespace Modules.Roots.Scripts
             IsDied = true;
             _currentSegment.Die();
             AliveService.Die(this);
+            _meshTransform.GetComponent<MeshRenderer>().material.SetTexture(MainTex, _diedTexture);
         }
     }
 }

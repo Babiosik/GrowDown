@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1441756243836591860}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: RootSegment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 992447685092805463}
   m_Layer: 0
   m_Name: Collider (1)
-  m_TagString: Untagged
+  m_TagString: RootSegment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _diedTexture: {fileID: 2800000, guid: f59c37cd3a661e840a81b114869e1bff, type: 3}
 --- !u!1 &5836787890933625748
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +346,7 @@ GameObject:
   - component: {fileID: 1880035440385986624}
   m_Layer: 0
   m_Name: Collider (2)
-  m_TagString: Untagged
+  m_TagString: RootSegment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

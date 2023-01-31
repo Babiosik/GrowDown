@@ -1,32 +1,26 @@
+using Modules.Services;
 using Modules.Singletones.Factories;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
 {
-    public class RootSegment : MonoBehaviour
+    public class RootSegment : MonoBehaviour, IRootSegment
     {
         // [SerializeField] private GameObject[] _rootSegmentMeshPrefab;
         // [SerializeField] private GameObject _rootSegmentPrefab;
         [SerializeField] private float _speed;
+        [SerializeField] private float _waterEat = 0.1f;
 
         private RootHead _rootHead;
         private Vector3 _endPoint;
         private float _percentGross;
         private RootSegmentMesh _rootSegmentMesh;
 
-        private RootSegment _prevSegment;
-        private RootSegment _nextSegment;
+        private IRootSegment _prevSegment;
+        private IRootSegment _nextSegment;
 
         private bool _isPause = true;
-        
         public bool IsDied { get; private set; } = false;
-
-        public Vector3 GetHeadPosition => _rootHead.transform.GetChild(0).position;
-
-        private void Start()
-        {
-            // _rootSegmentPrefab.name = _rootSegmentPrefab.name.Replace("(Clone)", "");
-        }
 
         private void Update()
         {
@@ -36,11 +30,18 @@ namespace Modules.Roots.Scripts
             _percentGross += _speed * Time.deltaTime;
             _rootSegmentMesh.UpdateGross(_percentGross);
             _rootHead.Move(_percentGross, _rootSegmentMesh.GetHeadPositionOffset);
+            
+            ResourcesService.Water.Value -= _waterEat * Time.deltaTime;
+            if (ResourcesService.Water.Value <= 0)
+            {
+                _rootHead.Die();
+                return;
+            }
 
             if (_percentGross >= 1) Clone();
         }
 
-        public void Init(RootSegment prev, RootHead head, Vector3 position, Quaternion rotation)
+        public void Init(IRootSegment prev, RootHead head, Vector3 position, Quaternion rotation)
         {
             _prevSegment = prev;
             transform.position = position;
@@ -69,17 +70,19 @@ namespace Modules.Roots.Scripts
         {
             _isPause = true;
             IsDied = true;
-            if (_prevSegment != null)
-                _prevSegment.Die();
+            _rootSegmentMesh.Die();
+            _prevSegment?.Die();
         }
 
         private void Clone()
         {
             _isPause = true;
-            _nextSegment = RootFactory.CreateRootSegment();
-            RootFactory.CreateRootSegmentMesh(_nextSegment);
             
-            _nextSegment.Init(this, _rootHead, _endPoint, transform.rotation);
+            RootSegment next = RootFactory.CreateRootSegment();
+            RootFactory.CreateRootSegmentMesh(next);
+            
+            next.Init(this, _rootHead, _endPoint, transform.rotation);
+            _nextSegment = next;
         }
     }
 }

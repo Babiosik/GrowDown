@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshTransform: {fileID: 1964738033910816246}
+  _diedTexture: {fileID: 2800000, guid: 9e635e81a7ddcfc4484242446948c274, type: 3}
 --- !u!114 &1964738035057268299
 MonoBehaviour:
   m_ObjectHideFlags: 0

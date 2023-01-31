@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1047448094383671426}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: RootSegment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _diedTexture: {fileID: 2800000, guid: b192447e7b81cd946a7cc6f08fcc2bd8, type: 3}
 --- !u!1 &6269237529832894250
 GameObject:
   m_ObjectHideFlags: 0

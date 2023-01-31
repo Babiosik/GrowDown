@@ -67,11 +67,15 @@ namespace Modules.RootChange.Scripts
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
             AliveService.Spawn(head);
-
-            if (!_isFirst)
-                RootFactory.CreateRootJoint(transform.position);
+            RootJoint joint = null;
             
-            segment.Init(null, head, transform.position, _angleLines[2].transform.rotation);
+            if (!_isFirst)
+            {
+                joint = RootFactory.CreateRootJoint(transform.position);
+                joint.Init(null, segment);
+            }
+            
+            segment.Init(joint, head, transform.position, _angleLines[2].transform.rotation);
         }
 
         private void SetActive(bool active)
