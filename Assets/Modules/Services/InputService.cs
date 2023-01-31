@@ -1,4 +1,4 @@
-namespace Modules.Core
+namespace Modules.Services
 {
     static public class InputService
     {
