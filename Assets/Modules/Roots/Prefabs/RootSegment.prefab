@@ -44,9 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee1f98c40d244cb5acb81eead3753331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rootSegmentMeshPrefab:
-  - {fileID: 5326782280324936875, guid: 3c3102afd94111048b43b7bd1f0d3d64, type: 3}
-  _rootSegmentPrefab: {fileID: 4974469476472372447}
   _speed: 0.3
-  _prevSegment: {fileID: 0}
-  _nextSegment: {fileID: 0}
+  _waterEat: 1
