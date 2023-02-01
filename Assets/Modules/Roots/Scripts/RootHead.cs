@@ -1,3 +1,4 @@
+using System;
 using Modules.Services;
 using UnityEngine;
 
@@ -35,12 +36,16 @@ namespace Modules.Roots.Scripts
         public void SetPauseGross(bool pause) =>
             _currentSegment.SetPauseGross(pause);
         
-        public void Die()
+        public void SetDied()
         {
             IsDied = true;
-            _currentSegment.Die();
-            AliveService.Die(this);
+            _currentSegment.SetDied();
+            _currentSegment.PlayDied();
             _meshTransform.GetComponent<MeshRenderer>().material.SetTexture(MainTex, _diedTexture);
+        }
+
+        public void PlayDied()
+        {
         }
     }
 }

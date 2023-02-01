@@ -1,3 +1,4 @@
+using System;
 using Modules.Services;
 using Modules.Singletones.Factories;
 using UnityEngine;
@@ -20,7 +21,9 @@ namespace Modules.Roots.Scripts
         private IRootSegment _nextSegment;
 
         private bool _isPause = true;
+        public bool IsPreDied { get; private set; } = false;
         public bool IsDied { get; private set; } = false;
+        public event Action OnDie;
 
         private void Update()
         {
@@ -34,7 +37,7 @@ namespace Modules.Roots.Scripts
             ResourcesService.Water.Value -= _waterEat * Time.deltaTime;
             if (ResourcesService.Water.Value <= 0)
             {
-                _rootHead.Die();
+                _rootHead.SetDied();
                 return;
             }
 
@@ -65,13 +68,27 @@ namespace Modules.Roots.Scripts
 
         public void SetPauseGross(bool pause) =>
             _isPause = pause || IsDied;
-        
-        public void Die()
+
+        public void SetDied()
         {
             _isPause = true;
             IsDied = true;
-            _rootSegmentMesh.Die();
-            _prevSegment?.Die();
+            OnDie?.Invoke();
+            _prevSegment?.SetDied();
+        }
+        
+        public void PlayDied()
+        {
+            _rootSegmentMesh
+                .Die()
+                .GetAwaiter()
+                .OnCompleted(() =>
+                {
+                    if (_prevSegment == null)
+                        AliveService.Die(_rootHead);
+                    else
+                        _prevSegment?.PlayDied();
+                });
         }
 
         private void Clone()
