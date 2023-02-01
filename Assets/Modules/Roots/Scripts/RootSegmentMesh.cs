@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
@@ -5,6 +7,8 @@ namespace Modules.Roots.Scripts
     [RequireComponent(typeof(MeshRenderer))]
     public class RootSegmentMesh : MonoBehaviour
     {
+        private const float DieAnimationPerTick = 2f;
+        
         [SerializeField] private Transform[] _pathPoints;
         [SerializeField] private AnimationCurve _pathPositionOffset;
         [SerializeField] private Texture _diedTexture;
@@ -62,10 +66,24 @@ namespace Modules.Roots.Scripts
             transform.localPosition = _position;
         }
 
-        public void Die()
+        [Obsolete("Obsolete")]
+        async public UniTask Die()
         {
-            _meshRenderer.material.SetTexture(MainTex, _diedTexture);
+            var obj = Instantiate(gameObject, transform.position + Vector3.forward, transform.rotation, transform.parent)
+                .GetComponent<RootSegmentMesh>();
+
+            await UniTask.WaitForEndOfFrame();
+
+            obj.DieInternal();
+            while(_uv.x > 0)
+            {
+                await UniTask.WaitForEndOfFrame();
+                UpdateGross(_uv.x - DieAnimationPerTick * Time.deltaTime);
+            }
         }
+        
+        private void DieInternal() =>
+            _localMaterial.SetTexture(MainTex, _diedTexture);
 
         private void SetClonedMaterial()
         {

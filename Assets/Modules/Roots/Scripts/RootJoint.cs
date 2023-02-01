@@ -1,3 +1,4 @@
+using Modules.Services;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
@@ -7,20 +8,28 @@ namespace Modules.Roots.Scripts
         [SerializeField] private MeshRenderer _mesh;
         [SerializeField] private Texture _diedTexture;
 
+        private RootHead _rootHead;
         private IRootSegment _prevSegment;
         private IRootSegment _nextSegment;
         private readonly static int MainTex = Shader.PropertyToID("_MainTex");
 
-        public void Init(IRootSegment prev, IRootSegment next)
+        public void Init(RootHead head, IRootSegment prev, IRootSegment next)
         {
+            _rootHead = head;
             _prevSegment = prev;
             _nextSegment = next;
         }
         
-        public void Die()
+        public void SetDied() =>
+            _prevSegment?.SetDied();
+
+        public void PlayDied()
         {
             _mesh.material.SetTexture(MainTex, _diedTexture);
-            _prevSegment?.Die();
+            if (_prevSegment == null)
+                AliveService.Die(_rootHead);
+            else
+                _prevSegment?.PlayDied();
         }
     }
 }

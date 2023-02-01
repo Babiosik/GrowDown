@@ -55,19 +55,24 @@ namespace Modules.RootChange.Scripts
 
             InputService.AllowControl = false;
             _inputSystem.All.DoButton.performed += OnApply;
-            
+
             if (_isFirst) return;
             _inputSystem.All.CancelButton.performed += OnCancel;
+            _selectedSegment.OnDie += Cancel;
         }
 
-        private void OnCancel(InputAction.CallbackContext callbackContext)
+        private void Cancel()
         {
+            _selectedSegment.OnDie -= Cancel;
             _inputSystem.All.CancelButton.performed -= OnCancel;
             _inputSystem.All.DoButton.performed -= OnApply;
             InputService.AllowControl = true;
 
             SetActive(false);
         }
+        
+        private void OnCancel(InputAction.CallbackContext callbackContext) =>
+            Cancel();
 
         private void OnApply(InputAction.CallbackContext obj)
         {
@@ -84,8 +89,9 @@ namespace Modules.RootChange.Scripts
 
             if (!_isFirst)
             {
+                _selectedSegment.OnDie -= Cancel;
                 joint = RootFactory.CreateRootJoint(transform.position);
-                joint.Init(null, segment);
+                joint.Init(head, null, segment);
             }
 
             segment.Init(joint, head, transform.position, _angleLines[2].transform.rotation);
