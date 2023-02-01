@@ -5,6 +5,11 @@ namespace Modules.Services
     static public class ResourcesService
     {
         static public Resource<float> Water { get; } = new Resource<float>(100);
+        
+        static public void Dispose()
+        {
+            Water.Value = 100;
+        }
     }
 
     public class Resource<T>

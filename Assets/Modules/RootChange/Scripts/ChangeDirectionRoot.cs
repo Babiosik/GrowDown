@@ -83,8 +83,9 @@ namespace Modules.RootChange.Scripts
         private void SetActive(bool active)
         {
             _isActive = active;
-            foreach (GameObject line in _angleLines)
-                line.SetActive(active);
+            gameObject.SetActive(active);
+            // foreach (GameObject line in _angleLines)
+            //     line.SetActive(active);
         }
 
     }

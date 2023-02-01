@@ -19,6 +19,9 @@ namespace Modules.Services
         static public void Die(RootHead rootHead) =>
             Inst.RemoveHead(rootHead);
         
+        static public void Dispose() =>
+            _self = null;
+        
         #endregion
         #region Instance
         

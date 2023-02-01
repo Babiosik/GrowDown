@@ -14,6 +14,9 @@ namespace Modules.Services
             set => Inst.SetAllowControl(value);
         }
 
+        static public void Dispose() =>
+            _self = null;
+
         #endregion
         #region Instance
 
