@@ -17,10 +17,9 @@ namespace Modules.ResourcesZone.Scripts
         [SerializeField] private float _amount;
         [SerializeField] private bool _randomAmount;
         [SerializeField] private Vector2 _randomAmountSize;
+        [SerializeField] private float _multScalePerWater;
         [SerializeField] private float _speedEat;
         [SerializeField] private bool _randomRotation;
-        [SerializeField] private bool _randomScale;
-        [SerializeField] private Vector2 _randomScaleSize;
 
         [SerializeField] private List<RootSegment> _rootSegments = new List<RootSegment>();
         private Vector3 _fullScale;
@@ -30,8 +29,11 @@ namespace Modules.ResourcesZone.Scripts
         {
             if (_randomRotation)
                 transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
-            if (_randomScale)
-                transform.localScale = Vector3.one * Random.Range(_randomScaleSize.x, _randomScaleSize.y);
+            if (_randomAmount)
+            {
+                _amount = Random.Range(_randomAmountSize.x, _randomAmountSize.y);
+                transform.localScale = Vector3.one * _multScalePerWater * _amount;
+            }
 
             transform.position += Vector3.forward * 0.0001f;
             _fullScale = transform.localScale;
@@ -53,8 +55,9 @@ namespace Modules.ResourcesZone.Scripts
             _amount -= diff;
             transform.localScale = Vector3.Lerp(Vector3.zero, _fullScale, _amount / _fullAmount);
 
-            if (_amount > 0) return;
+            if (_amount > 1) return;
             
+            ResourcesService.Water.Value += _amount;
             Destroy(gameObject);
         }
 
