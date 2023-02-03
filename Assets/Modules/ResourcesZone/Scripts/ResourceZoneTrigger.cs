@@ -3,7 +3,7 @@ using Modules.Roots.Scripts;
 using Modules.Services;
 using UnityEngine;
 
-namespace Modules.ItemZone.Scripts
+namespace Modules.ResourcesZone.Scripts
 {
     enum ResourceType
     {

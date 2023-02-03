@@ -1,4 +1,3 @@
-using System;
 using Modules.Services;
 using UnityEngine;
 
@@ -39,7 +38,7 @@ namespace Modules.Plants.Scripts
         private void SetNextLevel()
         {
             _grossTimer = 0;
-            if (_grossIndex >= _alivePlantGross.Length) return;
+            if (_grossIndex >= _alivePlantGross.Length - 1) return;
             _grossIndex++;
             SetTexture(_alivePlantGross[_grossIndex]);
         }

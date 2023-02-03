@@ -1,5 +1,3 @@
-using System;
-using Modules.Services;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
