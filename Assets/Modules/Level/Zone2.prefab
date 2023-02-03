@@ -143,4 +143,4 @@ MonoBehaviour:
   _spawnable:
   - {fileID: 1544323272115042432, guid: a6ab11148a3a9504f867b0901e956d8f, type: 3}
   _size: {x: 25, y: 10}
-  _count: 7
+  _count: 8
