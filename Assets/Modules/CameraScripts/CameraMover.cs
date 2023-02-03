@@ -18,47 +18,78 @@ namespace Modules.CameraScripts
 
         private InputSystem _inputSystem;
         private Camera _camera;
+        [SerializeField] private Vector3 _origin;
+        [SerializeField] private bool _isDrag;
 
         private void Start()
         {
             _inputSystem = InputService.InputSystem;
             _camera = GetComponent<Camera>();
-            AliveService.OnLevelUp += UnlockNewZone;
             UnlockNewZone(0);
+            OnEnable();
+        }
+        
+        private void OnEnable()
+        {
+            if (_inputSystem == null) return;
+
+            InputService.OnChangeAllow += OnChangeAllow;
+            AliveService.OnLevelUp += UnlockNewZone;
+            _inputSystem.All.Zoom.performed += Zoom;
+            _inputSystem.All.CancelButton.started += OnMouseStart;
+            _inputSystem.All.CancelButton.canceled += OnMouseEnd;
         }
 
-        private void Update()
+        private void OnDisable()
+        {
+            InputService.OnChangeAllow -= OnChangeAllow;
+            AliveService.OnLevelUp -= UnlockNewZone;
+            _inputSystem.All.Zoom.performed -= Zoom;
+            _inputSystem.All.CancelButton.started -= OnMouseStart;
+            _inputSystem.All.CancelButton.canceled -= OnMouseEnd;
+        }
+
+        private void LateUpdate()
+        {
+            if (!_isDrag) return;
+            
+            var mousePos = _inputSystem.All.CoursorPosition.ReadValue<Vector2>();
+            Vector3 diff = _camera.ScreenToWorldPoint(mousePos) - _camera.transform.position;
+            Vector3 pos = _origin - diff;
+
+            pos.x = Mathf.Clamp(pos.x, _borderMove.x, _borderMove.z);
+            pos.y = Mathf.Clamp(pos.y, _borderMove.y, _borderMove.w);
+            
+            _camera.transform.position = pos;
+        }
+
+        private void Zoom(InputAction.CallbackContext ctx)
         {
             if (!InputService.AllowControl) return;
 
-            Move(_inputSystem.All.Move);
-            Zoom(_inputSystem.All.Zoom);
-        }
-
-        private void Move(InputAction ctx)
-        {
-            Vector2 move = ctx.ReadValue<Vector2>() * _speed * Time.deltaTime;
-            if (transform.position.x + move.x < _borderMove.x)
-                move.x = 0;
-            else if (transform.position.x + move.x > _borderMove.z)
-                move.x = 0;
-
-            if (transform.position.y + move.y < _borderMove.y)
-                move.y = 0;
-            else if (transform.position.y + move.y > _borderMove.w)
-                move.y = 0;
-
-            transform.Translate(move);
-        }
-
-        private void Zoom(InputAction ctx)
-        {
             float scroll = -ctx.ReadValue<float>() * _scrollSensitivity * Time.deltaTime;
             scroll += _camera.orthographicSize;
             _camera.orthographicSize = Mathf.Clamp(scroll, _camZoomMin, _camZoomMax);
         }
-        
+
         private void UnlockNewZone(int level) =>
             _borderMove.y = -_sizePerLevel * (level + 1);
+
+        private void OnMouseStart(InputAction.CallbackContext ctx)
+        {
+            if (!InputService.AllowControl) return;
+
+            _isDrag = true;
+            var mousePos = _inputSystem.All.CoursorPosition.ReadValue<Vector2>();
+            _origin = _camera.ScreenToWorldPoint(mousePos);
+        }
+
+        private void OnMouseEnd(InputAction.CallbackContext ctx) =>
+            _isDrag = false;
+        
+        private void OnChangeAllow(bool isAllow)
+        {
+            if (!isAllow) _isDrag = false;
+        }
     }
 }

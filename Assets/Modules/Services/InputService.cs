@@ -1,3 +1,5 @@
+using System;
+
 namespace Modules.Services
 {
     public class InputService
@@ -7,11 +9,17 @@ namespace Modules.Services
         private static InputService Inst => _self ??= new InputService();
         private static InputService _self;
 
+        static public event Action<bool> OnChangeAllow; 
+        
         static public InputSystem InputSystem => Inst._inputSystem;
         static public bool AllowControl
         {
             get => Inst._allowControl;
-            set => Inst.SetAllowControl(value);
+            set
+            {
+                Inst.SetAllowControl(value);
+                OnChangeAllow?.Invoke(Inst._allowControl);
+            }
         }
 
         static public void Dispose() =>

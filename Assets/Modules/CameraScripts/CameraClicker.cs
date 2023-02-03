@@ -19,8 +19,8 @@ namespace Modules.CameraScripts
         {
             _inputSystem = InputService.InputSystem;
             _camera = Camera.main;
-            
-            _inputSystem.All.DoButton.performed += OnMouseClick;
+
+            OnEnable();
         }
 
         private void OnEnable()
@@ -34,7 +34,7 @@ namespace Modules.CameraScripts
         {
             _inputSystem.All.DoButton.performed -= OnMouseClick;
         }
-        
+
         private void OnMouseClick(InputAction.CallbackContext obj)
         {
             if (!InputService.AllowControl) return;
@@ -62,7 +62,7 @@ namespace Modules.CameraScripts
             
             return true;
         }
-        
+
         private bool TryRootSegment(Transform obj, Vector3 mouseWorldPos)
         {
             if (!obj.CompareTag("RootSegment")) return false;

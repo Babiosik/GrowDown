@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _level: 0
+  _isFinish: 0
 --- !u!65 &8315640610635883177
 BoxCollider:
   m_ObjectHideFlags: 0
