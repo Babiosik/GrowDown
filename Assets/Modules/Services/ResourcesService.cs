@@ -7,9 +7,9 @@ namespace Modules.Services
         static public event Action OnResourcesChange;
         static public Resource<float> Water { get; } = new Resource<float>(50);
         static public bool IsCanChangeDirection => Water.Value > ChangeDirectionResource;
-        static public int ChangeDirectionResource => 2;
-        static public bool IsCanStartRoot => Water.Value > 5;
-        static public int StartRootResource => 5;
+        static public int ChangeDirectionResource => 1;
+        static public bool IsCanStartRoot => Water.Value > StartRootResource;
+        static public int StartRootResource => 2;
         
         static public void Dispose()
         {
