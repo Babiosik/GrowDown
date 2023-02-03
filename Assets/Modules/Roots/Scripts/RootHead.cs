@@ -36,16 +36,11 @@ namespace Modules.Roots.Scripts
         public void SetPauseGross(bool pause) =>
             _currentSegment.SetPauseGross(pause);
         
-        public void SetDied()
+        public void Die()
         {
             IsDied = true;
-            _currentSegment.SetDied();
-            _currentSegment.PlayDied();
+            _currentSegment.Die();
             _meshTransform.GetComponent<MeshRenderer>().material.SetTexture(MainTex, _diedTexture);
-        }
-
-        public void PlayDied()
-        {
         }
     }
 }

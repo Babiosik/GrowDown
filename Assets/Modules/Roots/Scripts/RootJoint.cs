@@ -19,17 +19,14 @@ namespace Modules.Roots.Scripts
             _prevSegment = prev;
             _nextSegment = next;
         }
-        
-        public void SetDied() =>
-            _prevSegment?.SetDied();
 
-        public void PlayDied()
+        public void Die()
         {
             _mesh.material.SetTexture(MainTex, _diedTexture);
             if (_prevSegment == null)
                 AliveService.Die(_rootHead);
             else
-                _prevSegment?.PlayDied();
+                _prevSegment?.Die();
         }
     }
 }

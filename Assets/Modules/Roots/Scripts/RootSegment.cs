@@ -37,7 +37,7 @@ namespace Modules.Roots.Scripts
             ResourcesService.Water.Value -= _waterEat * Time.deltaTime;
             if (ResourcesService.Water.Value <= 0)
             {
-                _rootHead.SetDied();
+                _rootHead.Die();
                 return;
             }
 
@@ -69,16 +69,12 @@ namespace Modules.Roots.Scripts
         public void SetPauseGross(bool pause) =>
             _isPause = pause || IsDied;
 
-        public void SetDied()
+        [Obsolete("Obsolete")]
+        public void Die()
         {
             _isPause = true;
             IsDied = true;
             OnDie?.Invoke();
-            _prevSegment?.SetDied();
-        }
-        
-        public void PlayDied()
-        {
             _rootSegmentMesh
                 .Die()
                 .GetAwaiter()
@@ -87,7 +83,7 @@ namespace Modules.Roots.Scripts
                     if (_prevSegment == null)
                         AliveService.Die(_rootHead);
                     else
-                        _prevSegment?.PlayDied();
+                        _prevSegment?.Die();
                 });
         }
 
