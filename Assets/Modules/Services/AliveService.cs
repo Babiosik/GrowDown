@@ -13,6 +13,7 @@ namespace Modules.Services
         private static AliveService _self;
         
         static public event Action OnDied;
+        static public event Action<RootHead> OnFinish;
         static public event Action<int> OnLevelUp;
         static public int GetCurrentLevel => Inst._deepLevel;
         
@@ -24,6 +25,9 @@ namespace Modules.Services
 
         static public void SetDeepLevel(int level) =>
             Inst.SetLevel(level);
+
+        static public void SetFinish(RootHead rootHead) =>
+            OnFinish?.Invoke(rootHead);
         
         static public void Dispose() =>
             _self = null;
