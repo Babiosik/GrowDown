@@ -248,11 +248,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1544323272115042439}
   - component: {fileID: 3606697951832294765}
-  - component: {fileID: 1142424301336413583}
-  - component: {fileID: 2764911595233545054}
-  - component: {fileID: 2182020860339875678}
-  - component: {fileID: 1462794881694923422}
-  - component: {fileID: 8604116361766365072}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -290,73 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resource: 0
-  _amount: 100
-  _speedEat: 2
---- !u!135 &1142424301336413583
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544323272115042432}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.23
-  m_Center: {x: 0.29, y: 0.23, z: 0}
---- !u!135 &2764911595233545054
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544323272115042432}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.26
-  m_Center: {x: 0.25, y: -0.24, z: 0}
---- !u!135 &2182020860339875678
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544323272115042432}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.26
-  m_Center: {x: -0.31, y: 0, z: 0}
---- !u!135 &1462794881694923422
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544323272115042432}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.2
-  m_Center: {x: -0.03, y: 0.34, z: 0}
---- !u!135 &8604116361766365072
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544323272115042432}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.17
-  m_Center: {x: -0.09, y: -0.35, z: 0}
+  _amount: 20
+  _speedEat: 1
 --- !u!1 &2766916971134443949
 GameObject:
   m_ObjectHideFlags: 0
