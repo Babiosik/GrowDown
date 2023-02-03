@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2573368046980828176}
   - component: {fileID: 4953172318883986865}
   - component: {fileID: 6378962919346953504}
+  - component: {fileID: 2786928920422428734}
+  - component: {fileID: 2786928920422428735}
   m_Layer: 0
   m_Name: Zone1
   m_TagString: Untagged
@@ -133,6 +135,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnable:
-  - {fileID: 1544323272115042432, guid: a6ab11148a3a9504f867b0901e956d8f, type: 3}
+  - {fileID: 1544323272115042432, guid: 96531996012c4444a8c36aa29499775d, type: 3}
+  - {fileID: 1544323272115042432, guid: e8d650f23423a1f43a0545ea720ab58f, type: 3}
   _size: {x: 25, y: 10}
-  _count: 8
+  _count: 3
+--- !u!114 &2786928920422428734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124535722170745029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcfac2ee4c514459b633bc4d677106ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnable:
+  - {fileID: 1544323272115042432, guid: b8b30c022b2549140a86d50e532f0fa5, type: 3}
+  - {fileID: 1544323272115042432, guid: bcc41dec29fdd864ba897a986fd715d3, type: 3}
+  - {fileID: 1544323272115042432, guid: 5f24f8a10546b4448b1e7a66f27a7ad0, type: 3}
+  _size: {x: 25, y: 8}
+  _count: 2
+--- !u!114 &2786928920422428735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124535722170745029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcfac2ee4c514459b633bc4d677106ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnable:
+  - {fileID: 1544323272115042432, guid: a6ab11148a3a9504f867b0901e956d8f, type: 3}
+  - {fileID: 1544323272115042432, guid: 96531996012c4444a8c36aa29499775d, type: 3}
+  - {fileID: 1544323272115042432, guid: 7e382df29a78ddc47bcdf0a23f7b907b, type: 3}
+  _size: {x: 25, y: 8}
+  _count: 3
