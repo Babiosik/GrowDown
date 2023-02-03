@@ -13,6 +13,7 @@ namespace Modules.UI.Scripts
         private const int WinScreenDelay = 1000;
         private const float WinMoveDuration = 2;
 
+        [SerializeField] private GameObject[] _enableItems;
         [SerializeField] private GameObject _hud;
         [SerializeField] private Camera _camera;
         [SerializeField] private Transform _target;
@@ -64,6 +65,9 @@ namespace Modules.UI.Scripts
             });
             
             await moveAnimation.AsyncWaitForCompletion();
+            
+            foreach (GameObject enableItem in _enableItems)
+                enableItem.SetActive(true);
         }
         
         private async UniTask MoveToStart()

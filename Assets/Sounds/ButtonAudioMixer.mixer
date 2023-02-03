@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ButtonAudioMixer
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters: []
+  m_AudioMixerGroupViews: []
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 5652204aead629f4083308bb9f4859fe
+  m_Children: []
+  m_Volume: 91eb3ac217a0e854a9fe077992c0d6b7
+  m_Pitch: 6fe861e1ed7017b46a4da9380e764148
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 6278fd654ddb38d40be160052a32c2b6
+  m_EffectName: Attenuation
+  m_MixLevel: 22c9f25ec5d587a4d8c14b566d00d9b5
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 7b8d31e662997df44b2fca2e8be81e20
+  m_FloatValues:
+    74813a40662b712419039da206e6afea: 1
+    2d6f1070f4941cf49961970e9b58b85b: 0.601
+    91eb3ac217a0e854a9fe077992c0d6b7: -10
+    ad9894d2697b2bc45ad407769eac6901: 1
+    156b3923644945f4c9555e338cb3b547: 1
+    208885a3b21a7c54099d27472bf529a8: 1
+    680e346794d08a84aa81518c731d974e: 0.633
+    53712909875fee54999e07050318f6d7: 20
+    51a4f2d93959e244286e42437a4438aa: 1
+    b832d4d942da27e43a028a9f3b58d928: 1
+    148cff1a7275b694c9ef47bf26b87c34: 6
+    b2db1d7cb5f5e8d44aee13a373795ccb: 0
+    04a90a1e6ef28b842aaeee29ce76d026: 100
+  m_TransitionOverrides: {}

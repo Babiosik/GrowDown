@@ -563,7 +563,7 @@ AudioSource:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7893e35dc3f2aa04280d08a20b944c80, type: 2}
   m_audioClip: {fileID: 8300000, guid: a3fa55327b342cf40b78892c84c49277, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.6
@@ -1238,6 +1238,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965816940}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &977025640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9122590729967021797, guid: ed9587220a355d94c9c91247bc607898, type: 3}
+  m_PrefabInstance: {fileID: 881869290255496451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &986531912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,6 +1276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94c1cee7a7a454e83e08099206e011a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableItems:
+  - {fileID: 977025640}
   _hud: {fileID: 942199278}
   _camera: {fileID: 519420031}
   _target: {fileID: 106137556}
@@ -3766,6 +3773,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378962919346953504, guid: a1f15546cb4cfd342a0810e40cc0ea9b, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807858221492519612, guid: a1f15546cb4cfd342a0810e40cc0ea9b, type: 3}
+      propertyPath: _isFinish
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8537785439697893063, guid: a1f15546cb4cfd342a0810e40cc0ea9b, type: 3}
