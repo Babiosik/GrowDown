@@ -16,6 +16,7 @@ namespace Modules.Roots.Scripts
         private Vector3 _endPoint;
         private float _percentGross;
         private RootSegmentMesh _rootSegmentMesh;
+        private AudioSource _audioSource;
 
         private IRootSegment _prevSegment;
         private IRootSegment _nextSegment;
@@ -63,6 +64,7 @@ namespace Modules.Roots.Scripts
         
         public void Init(IRootSegment prev, RootHead head, Vector3 position, Quaternion rotation)
         {
+            _audioSource = GetComponent<AudioSource>();
             _prevSegment = prev;
             transform.position = position;
             transform.rotation = rotation;
@@ -77,7 +79,7 @@ namespace Modules.Roots.Scripts
             );
             
             _percentGross = 0;
-            _isPause = false;
+            SetPauseGross(false);
         }
 
         public void SetMesh(RootSegmentMesh mesh)
@@ -86,13 +88,19 @@ namespace Modules.Roots.Scripts
             _rootSegmentMesh.OnClick += OnMeshClick;
         }
 
-        public void SetPauseGross(bool pause) =>
+        public void SetPauseGross(bool pause)
+        {
             _isPause = pause || IsDied;
+            if (_isPause)
+                _audioSource.Stop();
+            else
+                _audioSource.Play();
+        }
 
         [Obsolete("Obsolete")]
         public void Die()
         {
-            _isPause = true;
+            SetPauseGross(true);
             IsDied = true;
             _rootSegmentMesh
                 .Die()
@@ -109,7 +117,7 @@ namespace Modules.Roots.Scripts
 
         private void Clone()
         {
-            _isPause = true;
+            SetPauseGross(true);
             
             RootSegment next = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(next);

@@ -61,7 +61,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 20, z: 1}
+  m_Size: {x: 50, y: 18, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-2801366545239178162
 MonoBehaviour:
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnable:
   - {fileID: 1544323272115042432, guid: a6ab11148a3a9504f867b0901e956d8f, type: 3}
-  _size: {x: 25, y: 10}
+  _size: {x: 25, y: 8}
   _count: 9
 --- !u!114 &8315640609916906781
 MonoBehaviour:
@@ -172,7 +172,7 @@ MonoBehaviour:
   - {fileID: 7936459825451127958, guid: eb43f4bbcd7bdc943aa43a2f37134561, type: 3}
   - {fileID: 3011026152693802634, guid: aa89db129cc98534b873db5466c5818c, type: 3}
   - {fileID: 8237265361843418627, guid: c2e20ff3cd7749043bc2c916a02fbd1c, type: 3}
-  _size: {x: 25, y: 10}
+  _size: {x: 25, y: 8}
   _count: 90
 --- !u!114 &2786928920639510481
 MonoBehaviour:
@@ -197,5 +197,5 @@ MonoBehaviour:
   - {fileID: 1544323272115042432, guid: 27ded6786c4dad848857e0b9b86e9a59, type: 3}
   - {fileID: 1544323272115042432, guid: e9b51510bcb308944aa0fec52c7669c8, type: 3}
   - {fileID: 1544323272115042432, guid: 5460f192e622ec74487251ab2f717d60, type: 3}
-  _size: {x: 25, y: 8}
+  _size: {x: 25, y: 7}
   _count: 5
