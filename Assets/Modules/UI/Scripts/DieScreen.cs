@@ -34,6 +34,8 @@ namespace Modules.UI.Scripts
         private async void OnDied()
         {
             _hud.SetActive(false);
+            _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
             InputService.AllowControl = false;
             Vector3 target = _target.position;
             target.z = _camera.transform.position.z;

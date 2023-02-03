@@ -35,6 +35,8 @@ namespace Modules.UI.Scripts
         private async void OnFinish(RootHead rootHead)
         {
             _hud.SetActive(false);
+            _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
             InputService.AllowControl = false;
 
             await MoveToFinish(rootHead);
