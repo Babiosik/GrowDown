@@ -1,3 +1,4 @@
+using System;
 using Modules.Services;
 using UnityEngine;
 
@@ -6,18 +7,19 @@ namespace Modules.Plants.Scripts
     [RequireComponent(typeof(MeshRenderer))]
     public class PlantLive : MonoBehaviour
     {
-        [SerializeField] private Texture[] _alivePlantGross;
-        [SerializeField] private Texture[] _deadPlantGross;
-        [SerializeField] private float _timeForGross;
+        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
+        
+        [SerializeField] private float _deepMinCam;
+        [SerializeField] private Camera _camera;
 
         private MeshRenderer _mesh;
-        private bool _isDead = false;
-        private int _grossIndex = 0;
-        private float _grossTimer = 0;
-        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
+        private DeepZone _zone;
+        private bool _isNeedChange;
 
-        private void Start() =>
+        private void Start()
+        {
             _mesh = GetComponent<MeshRenderer>();
+        }
 
         private void OnEnable() =>
             AliveService.OnDied += OnDied;
@@ -27,27 +29,26 @@ namespace Modules.Plants.Scripts
 
         private void Update()
         {
-            if (_isDead) return;
-            
-            _grossTimer += Time.deltaTime;
+            if (!_isNeedChange) return;
 
-            if (_grossTimer < _timeForGross) return;
-            SetNextLevel();
-        }
-        
-        private void SetNextLevel()
-        {
-            _grossTimer = 0;
-            if (_grossIndex >= _alivePlantGross.Length - 1) return;
-            _grossIndex++;
-            SetTexture(_alivePlantGross[_grossIndex]);
+            if (_camera.transform.position.y > _deepMinCam) return;
+            SetTexture(_zone.AliveTexture);
+            _isNeedChange = false;
         }
 
-        private void OnDied()
+        public void SetZone(DeepZone zone)
         {
-            _isDead = true;
-            SetTexture(_deadPlantGross[_grossIndex]);
+            if (_zone != null && _zone.Level >= zone.Level) return;
+
+            _zone = zone;
+            if (_camera.transform.position.y < _deepMinCam)
+                SetTexture(_zone.AliveTexture);
+            else
+                _isNeedChange = true;
         }
+
+        private void OnDied() =>
+            SetTexture(_zone.DeadTexture);
 
         private void SetTexture(Texture texture) =>
             _mesh.material.SetTexture(MainTex, texture);
