@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 1544323272115042439}
   - component: {fileID: 3606697951832294765}
   - component: {fileID: 280688778088712026}
+  - component: {fileID: 1379042389492152530}
   m_Layer: 0
   m_Name: Water_20_30
   m_TagString: Untagged
@@ -291,6 +292,9 @@ MonoBehaviour:
   _multScalePerWater: 0.15
   _speedEat: 1
   _randomRotation: 1
+  _audioSource: {fileID: 0}
+  _helpSound: {fileID: 8300000, guid: 36163fa8d9dfe5a4da8b2692b7cdd9e0, type: 3}
+  _decreasingSound: {fileID: 8300000, guid: 138ade91bc3643945ba8d77d02444659, type: 3}
   _rootSegments: []
 --- !u!82 &280688778088712026
 AudioSource:
@@ -304,9 +308,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -388,6 +392,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1379042389492152530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544323272115042432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6799ff576c047fba2fcb69d1409474f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxDistance: 5
 --- !u!1 &2766916971134443949
 GameObject:
   m_ObjectHideFlags: 0

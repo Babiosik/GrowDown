@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Modules.Roots.Scripts;
 using Modules.Services;
+using Sounds;
 using UnityEngine;
 
 namespace Modules.ResourcesZone.Scripts
@@ -20,6 +21,9 @@ namespace Modules.ResourcesZone.Scripts
         [SerializeField] private float _multScalePerWater;
         [SerializeField] private float _speedEat;
         [SerializeField] private bool _randomRotation;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _helpSound;
+        [SerializeField] private AudioClip _decreasingSound;
 
         [SerializeField] private List<RootSegment> _rootSegments = new List<RootSegment>();
         private Vector3 _fullScale;
@@ -27,6 +31,10 @@ namespace Modules.ResourcesZone.Scripts
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
+            _audioSource.clip = _helpSound;
+            _audioSource.Play();
+
             if (_randomRotation)
                 transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
             if (_randomAmount)
@@ -61,11 +69,21 @@ namespace Modules.ResourcesZone.Scripts
             Destroy(gameObject);
         }
 
-        public void OnSegmentEnter(RootSegment rootSegment) =>
+        public void OnSegmentEnter(RootSegment rootSegment)
+        {
+            _audioSource.clip = _decreasingSound;
+            _audioSource.Play();
             _rootSegments.Add(rootSegment);
+        }
 
-        public void OnSegmentExit(RootSegment rootSegment) =>
+        public void OnSegmentExit(RootSegment rootSegment)
+        {
             _rootSegments.Remove(rootSegment);
+            if (_rootSegments.Count > 0) return;
+            
+            _audioSource.clip = _helpSound;
+            _audioSource.Play();
+        }
 
 
     }
