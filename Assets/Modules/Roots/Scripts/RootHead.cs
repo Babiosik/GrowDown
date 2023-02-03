@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Modules.CameraScripts;
 using Modules.Services;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Modules.Roots.Scripts
 
         private MeshRenderer _meshRenderer;
         private RootSegment _currentSegment;
+        private AudioSource _audioSource;
         private Vector3 _localMeshPosition;
         private Vector3 _start;
         private Vector3 _end;
@@ -26,6 +28,7 @@ namespace Modules.Roots.Scripts
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             _meshRenderer = _meshTransform.GetComponent<MeshRenderer>();
         }
 
@@ -66,11 +69,13 @@ namespace Modules.Roots.Scripts
         public void SetPauseGross(bool pause) =>
             _currentSegment.SetPauseGross(pause);
         
-        public void Die()
+        async public void Die()
         {
             IsDied = true;
-            _currentSegment.Die();
+            _audioSource.Play();
             SetTexture(_diedTexture);
+            await UniTask.Delay(300);
+            _currentSegment.Die();
         }
         
         private void SetTexture(Texture texture) =>
