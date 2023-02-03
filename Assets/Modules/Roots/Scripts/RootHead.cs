@@ -1,11 +1,20 @@
+using System;
+using Modules.CameraScripts;
+using Modules.Services;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
 {
     public class RootHead : MonoBehaviour, IRootSegment
     {
+        public static event Action<RootHead> OnClick;
+        
         [SerializeField] private Transform _meshTransform;
+        [SerializeField] private Texture _aliveTexture;
+        [SerializeField] private Texture _highlightTexture;
         [SerializeField] private Texture _diedTexture;
+
+        private MeshRenderer _meshRenderer;
         private RootSegment _currentSegment;
         private Vector3 _localMeshPosition;
         private Vector3 _start;
@@ -14,6 +23,29 @@ namespace Modules.Roots.Scripts
 
         public bool IsDied { get; private set; } = false;
         public RootSegment GetCurrentSegment => _currentSegment;
+
+        private void Start()
+        {
+            _meshRenderer = _meshTransform.GetComponent<MeshRenderer>();
+        }
+
+        private void OnMouseEnter()
+        {
+            if (IsDied) return;
+            SetTexture(_highlightTexture);
+        }
+
+        private void OnMouseExit()
+        {
+            if (IsDied) return;
+            SetTexture(_aliveTexture);
+        }
+
+        private void OnMouseDown()
+        {
+            if (IsDied || !ResourcesService.IsCanChangeDirection) return;
+            OnClick?.Invoke(this);
+        }
 
         public void SetSegment(RootSegment segment, Vector3 start, Vector3 end, float rotation)
         {
@@ -38,7 +70,10 @@ namespace Modules.Roots.Scripts
         {
             IsDied = true;
             _currentSegment.Die();
-            _meshTransform.GetComponent<MeshRenderer>().material.SetTexture(MainTex, _diedTexture);
+            SetTexture(_diedTexture);
         }
+        
+        private void SetTexture(Texture texture) =>
+            _meshRenderer.material.SetTexture(MainTex, texture);
     }
 }

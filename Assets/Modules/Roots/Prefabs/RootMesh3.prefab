@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 5326782280324936876}
   - component: {fileID: 5326782280324936877}
   - component: {fileID: 5326782280324936878}
+  - component: {fileID: 800107566096087670}
   m_Layer: 7
   m_Name: RootMesh3
   m_TagString: RootSegment
@@ -382,11 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611617d0214b484c81047cad458633c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pathPoints:
-  - {fileID: 3378768934766044072}
-  - {fileID: 7176414189492096527}
-  - {fileID: 386896616845067067}
-  - {fileID: 5120912251156321159}
   _pathPositionOffset:
     serializedVersion: 2
     m_Curve:
@@ -430,6 +426,39 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _diedTexture: {fileID: 2800000, guid: 0d94d26c07427c142b8441cec8975a5e, type: 3}
+--- !u!60 &800107566096087670
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326782280324936875}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.17368856, y: 0.06210485}
+      - {x: -0.23592018, y: 0.49109736}
+      - {x: -0.4977849, y: 0.243535}
+      - {x: -0.4986535, y: -0.29767674}
+      - {x: -0.2371855, y: -0.031836182}
+      - {x: 0.15441783, y: -0.45792437}
+      - {x: 0.49912277, y: -0.28192753}
+      - {x: 0.49778485, y: 0.26134038}
 --- !u!1 &5873316706964059540
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,8 +7,8 @@ namespace Modules.Roots.Scripts
 {
     public class RootSegment : MonoBehaviour, IRootSegment
     {
-        // [SerializeField] private GameObject[] _rootSegmentMeshPrefab;
-        // [SerializeField] private GameObject _rootSegmentPrefab;
+        public static event Action<RootSegment> OnClick;
+
         [SerializeField] private float _speed;
         [SerializeField] private float _waterEat = 0.1f;
 
@@ -23,6 +23,24 @@ namespace Modules.Roots.Scripts
         private bool _isPause = true;
         public bool IsDied { get; private set; } = false;
         public event Action OnDie;
+
+        private void OnMouseDown()
+        {
+            if (IsDied || !ResourcesService.IsCanStartRoot) return;
+            OnClick?.Invoke(this);
+        }
+        
+        private void OnEnable()
+        {
+            if (_rootSegmentMesh != null)
+                _rootSegmentMesh.OnClick += OnMeshClick;
+        }
+
+        private void OnDisable()
+        {
+            if (_rootSegmentMesh != null)
+                _rootSegmentMesh.OnClick -= OnMeshClick;
+        }
 
         private void Update()
         {
@@ -42,7 +60,7 @@ namespace Modules.Roots.Scripts
 
             if (_percentGross >= 1) Clone();
         }
-
+        
         public void Init(IRootSegment prev, RootHead head, Vector3 position, Quaternion rotation)
         {
             _prevSegment = prev;
@@ -62,8 +80,11 @@ namespace Modules.Roots.Scripts
             _isPause = false;
         }
 
-        public void SetMesh(RootSegmentMesh mesh) =>
+        public void SetMesh(RootSegmentMesh mesh)
+        {
             _rootSegmentMesh = mesh;
+            _rootSegmentMesh.OnClick += OnMeshClick;
+        }
 
         public void SetPauseGross(bool pause) =>
             _isPause = pause || IsDied;
@@ -96,5 +117,8 @@ namespace Modules.Roots.Scripts
             next.Init(this, _rootHead, _endPoint, transform.rotation);
             _nextSegment = next;
         }
+
+        private void OnMeshClick() =>
+            OnClick?.Invoke(this);
     }
 }

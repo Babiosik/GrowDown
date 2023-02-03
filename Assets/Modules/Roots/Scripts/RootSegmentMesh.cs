@@ -8,9 +8,9 @@ namespace Modules.Roots.Scripts
     [RequireComponent(typeof(MeshRenderer))]
     public class RootSegmentMesh : MonoBehaviour
     {
+        public event Action OnClick;
         private const float DieAnimationPerTick = 2f;
         
-        [SerializeField] private Transform[] _pathPoints;
         [SerializeField] private AnimationCurve _pathPositionOffset;
         [SerializeField] private Texture _diedTexture;
 
@@ -31,6 +31,9 @@ namespace Modules.Roots.Scripts
             SetClonedMaterial();
         }
 
+        private void OnMouseDown() =>
+            OnClick?.Invoke();
+
         public void Init()
         {
             _scale = _size = transform.localScale;
@@ -38,22 +41,6 @@ namespace Modules.Roots.Scripts
             _uv = new Vector2(0, 1);
             _position = Vector3.zero;
             transform.localScale = _scale;
-
-            // float tang = -0.5f;
-            // float weight = 0.1f;
-            // _pathPositionOffset = new AnimationCurve();
-            // foreach (Transform pathPoint in _pathPoints)
-            // {
-            //     Vector3 localPosition = pathPoint.localPosition;
-            //     _pathPositionOffset.AddKey(new Keyframe(
-            //         (localPosition.x + 0.5f) * 3,
-            //         localPosition.y / 2,
-            //         tang,
-            //         tang,
-            //         weight,
-            //         weight
-            //     ));
-            // }
         }
 
         public void UpdateGross(float grossPercent)

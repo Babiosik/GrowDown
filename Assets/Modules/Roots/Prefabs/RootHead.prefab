@@ -139,9 +139,10 @@ GameObject:
   - component: {fileID: 1964738035057268404}
   - component: {fileID: 1964738035057268405}
   - component: {fileID: 1964738035057268299}
+  - component: {fileID: 6826299487326978598}
   m_Layer: 7
   m_Name: RootHead
-  m_TagString: Untagged
+  m_TagString: RootHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshTransform: {fileID: 1964738033910816246}
+  _aliveTexture: {fileID: 2800000, guid: 710a3c1c7ef55604a86c577fea744327, type: 3}
+  _highlightTexture: {fileID: 2800000, guid: 9e845e8f80924df4f843560584331c2a, type: 3}
   _diedTexture: {fileID: 2800000, guid: 9e635e81a7ddcfc4484242446948c274, type: 3}
 --- !u!114 &1964738035057268299
 MonoBehaviour:
@@ -194,3 +197,19 @@ MonoBehaviour:
   _width: 2
   _length: 2
   _lengthReCheck: 2
+--- !u!58 &6826299487326978598
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964738035057268406}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

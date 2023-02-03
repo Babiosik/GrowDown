@@ -26,55 +26,28 @@ namespace Modules.CameraScripts
         private void OnEnable()
         {
             if (_inputSystem == null) return;
-            
-            _inputSystem.All.DoButton.performed += OnMouseClick;
+
+            RootHead.OnClick += OnRootHeadClick;
+            RootSegment.OnClick += OnRootSegmentClick;
         }
 
         private void OnDisable()
         {
-            _inputSystem.All.DoButton.performed -= OnMouseClick;
+            RootHead.OnClick -= OnRootHeadClick;
+            RootSegment.OnClick -= OnRootSegmentClick;
         }
 
-        private void OnMouseClick(InputAction.CallbackContext obj)
-        {
-            if (!InputService.AllowControl) return;
+        private void OnRootHeadClick(RootHead rootHead) =>
+            _changeDirectionRoot.Triggered(rootHead);
 
+        private void OnRootSegmentClick(RootSegment rootSegment)
+        {
             var mousePos = _inputSystem.All.CoursorPosition.ReadValue<Vector2>();
-            Ray ray = _camera.ScreenPointToRay(mousePos);
-            RaycastHit hit;
-
-            if (!Physics.Raycast(ray, out hit, 100, _layerMask))
-                return;
-
-            if (TryRootHead(hit.transform)) return;
-            if (TryRootSegment(hit.transform, hit.point)) return;
-        }
-
-        private bool TryRootHead(Transform obj)
-        {
-            if (!obj.CompareTag("RootHead")) return false;
             
-            var rootHead = obj.parent.GetComponent<RootHead>();
-            if (rootHead == null) return false;
-            if (rootHead.IsDied || !ResourcesService.IsCanChangeDirection) return true;
-            
-            _changeDirectionRoot.Triggered(rootHead);           
-            
-            return true;
-        }
-
-        private bool TryRootSegment(Transform obj, Vector3 mouseWorldPos)
-        {
-            if (!obj.CompareTag("RootSegment")) return false;
-            
-            var rootSegment = obj.parent.parent.GetComponent<RootSegment>();
-            if (rootSegment == null) return false;
-            if (rootSegment.IsDied || !ResourcesService.IsCanStartRoot) return true;
-
-            _spawnRoot.transform.position = mouseWorldPos;
+            var pos = _camera.ScreenToWorldPoint(mousePos);
+            pos.z = 0;
+            _spawnRoot.transform.position = pos;
             _spawnRoot.Triggered(rootSegment);
-            
-            return true;
         }
     }
 }
