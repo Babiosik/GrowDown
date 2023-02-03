@@ -27,8 +27,8 @@ namespace Modules.Services
             Inst.SetLevel(level);
 
         static public void SetFinish(RootHead rootHead) =>
-            OnFinish?.Invoke(rootHead);
-        
+            Inst.SetFinishInternal(rootHead);
+
         static public void Dispose() =>
             _self = null;
         
@@ -55,6 +55,13 @@ namespace Modules.Services
             if (level <= _deepLevel) return;
             _deepLevel = level;
             OnLevelUp?.Invoke(_deepLevel);
+        }
+        
+        private void SetFinishInternal(RootHead rootHead)
+        {
+            foreach (RootHead aliveHead in _aliveHeads)
+                aliveHead.GetCurrentSegment.SetPauseGross(true);
+            OnFinish?.Invoke(rootHead);
         }
         
         #endregion

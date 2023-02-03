@@ -1,3 +1,4 @@
+using Modules.Roots.Scripts;
 using Modules.Services;
 using UnityEngine;
 
@@ -20,12 +21,14 @@ namespace Modules.Plants.Scripts
         {
             AliveService.OnDied += OnDied;
             AliveService.OnLevelUp += OnLevelUp;
+            AliveService.OnFinish += OnFinish;
         }
 
         private void OnDisable()
         {
             AliveService.OnDied -= OnDied;
             AliveService.OnLevelUp -= OnLevelUp;
+            AliveService.OnFinish += OnFinish;
         }
 
         private void Update()
@@ -56,5 +59,8 @@ namespace Modules.Plants.Scripts
 
         private void OnDied() =>
             _currentLevel.Die();
+
+        private void OnFinish(RootHead rootHead) =>
+            _currentLevel.enabled = false;
     }
 }
