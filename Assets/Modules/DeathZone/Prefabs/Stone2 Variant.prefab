@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 496173570001391703, guid: f7871d4b9e2072848b972a5795c41cdc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 340374e028a48534cb1040dae734b8da, type: 2}
     - target: {fileID: 4899764695592140353, guid: f7871d4b9e2072848b972a5795c41cdc, type: 3}
       propertyPath: m_Name
       value: Stone2 Variant

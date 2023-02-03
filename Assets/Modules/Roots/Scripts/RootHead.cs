@@ -73,8 +73,8 @@ namespace Modules.Roots.Scripts
         {
             IsDied = true;
             _audioSource.Play();
-            SetTexture(_diedTexture);
             await UniTask.Delay(300);
+            SetTexture(_diedTexture);
             _currentSegment.Die();
         }
         
