@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 1544323272115042439}
   - component: {fileID: 3606697951832294765}
   m_Layer: 0
-  m_Name: Water
+  m_Name: Water_20_35
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,10 +285,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resource: 0
   _amount: 20
+  _randomAmount: 1
+  _randomAmountSize: {x: 20, y: 35}
+  _multScalePerWater: 0.15
   _speedEat: 1
   _randomRotation: 1
-  _randomScale: 1
-  _randomScaleSize: {x: 1, y: 3}
+  _rootSegments: []
 --- !u!1 &2766916971134443949
 GameObject:
   m_ObjectHideFlags: 0
