@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6657744241549217587}
   - component: {fileID: 4323609304605813563}
+  - component: {fileID: 7823409437910569005}
   m_Layer: 0
   m_Name: Collider (1)
   m_TagString: RootSegment
@@ -76,6 +77,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7823409437910569005
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392934372381930871}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &1597875545365655094
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7602071804757655742}
   - component: {fileID: 7153704206175316852}
+  - component: {fileID: 3412107441775149583}
   m_Layer: 0
   m_Name: Collider
   m_TagString: RootSegment
@@ -152,6 +170,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3412107441775149583
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2211030915838585810}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &4125438717343937294
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7745973576048750593}
   - component: {fileID: 6252258795750970755}
+  - component: {fileID: 94748525528026775}
   m_Layer: 0
   m_Name: Collider (2)
   m_TagString: RootSegment
@@ -228,6 +263,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &94748525528026775
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971901484429337069}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &5326782280324936875
 GameObject:
   m_ObjectHideFlags: 0

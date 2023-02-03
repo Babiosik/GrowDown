@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2694880226368335349}
   - component: {fileID: 2694880226368335347}
   - component: {fileID: 2694880226368335348}
+  - component: {fileID: 1538233103}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -28,7 +29,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2694880226808459088}
   m_RootOrder: 1
@@ -76,6 +77,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &1538233103
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694880226368335350}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77620f020428b26428d9eec2787206d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2694880226587796532
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,8 +149,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxOffset: 200
   _bar: {fileID: 2694880226765143547}
-  _maxValue: 50
-  _value: 0
+  _maxValue: 200
+  _dangerousLine: 90
+  _dangerousAnimator: {fileID: 1538233103}
 --- !u!1 &2694880226765143549
 GameObject:
   m_ObjectHideFlags: 0
