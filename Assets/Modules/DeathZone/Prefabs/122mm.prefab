@@ -131,6 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456f69b5229a4b79b9512dd6b0ff0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _randomRotation: 1
+  _randomScale: 1
+  _randomScaleSize: {x: 0.9, y: 1.1}
 --- !u!65 &3168181300113174729
 BoxCollider:
   m_ObjectHideFlags: 0

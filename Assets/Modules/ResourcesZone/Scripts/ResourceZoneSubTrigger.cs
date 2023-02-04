@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Modules.Roots.Scripts;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace Modules.ResourcesZone.Scripts
         private const string RootHeadTag = "RootHead";
         private const string RootSegmentTag = "RootSegment";
         
-        [SerializeField] private List<RootSegment> _rootSegmentColliders = new List<RootSegment>();
+        private List<RootSegment> _rootSegmentColliders = new List<RootSegment>();
         private ResourceZoneTrigger _zone;
 
         private void Start()

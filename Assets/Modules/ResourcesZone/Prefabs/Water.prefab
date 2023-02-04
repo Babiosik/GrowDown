@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f016e7e1240a4dd1ac2e5e94bb6b180c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rootSegmentColliders: []
 --- !u!1 &1544323271355588297
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +286,9 @@ MonoBehaviour:
   _resource: 0
   _amount: 20
   _speedEat: 1
+  _randomRotation: 1
+  _randomScale: 1
+  _randomScaleSize: {x: 1, y: 3}
 --- !u!1 &2766916971134443949
 GameObject:
   m_ObjectHideFlags: 0
