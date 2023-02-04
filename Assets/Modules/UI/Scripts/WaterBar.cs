@@ -19,6 +19,7 @@ namespace Modules.UI.Scripts
         private void Start()
         {
             _startPosition = _bar.rectTransform.anchoredPosition;
+            OnWaterChange(ResourcesService.Water.Value);
         }
 
         private void OnEnable() =>
