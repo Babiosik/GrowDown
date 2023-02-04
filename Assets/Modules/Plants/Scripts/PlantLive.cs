@@ -4,53 +4,58 @@ using UnityEngine;
 
 namespace Modules.Plants.Scripts
 {
-    [RequireComponent(typeof(MeshRenderer))]
     public class PlantLive : MonoBehaviour
     {
-        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
-        
         [SerializeField] private float _deepMinCam;
         [SerializeField] private Camera _camera;
+        [SerializeField] private PlantLevel[] _levels;
 
-        private MeshRenderer _mesh;
-        private DeepZone _zone;
+        private PlantLevel _currentLevel;
         private bool _isNeedChange;
+        private int _level;
 
-        private void Start()
+        private void Start() =>
+            _currentLevel = _levels[0];
+        
+        private void OnEnable()
         {
-            _mesh = GetComponent<MeshRenderer>();
+            AliveService.OnDied += OnDied;
+            AliveService.OnLevelUp += OnLevelUp;
         }
 
-        private void OnEnable() =>
-            AliveService.OnDied += OnDied;
-
-        private void OnDisable() =>
+        private void OnDisable()
+        {
             AliveService.OnDied -= OnDied;
+            AliveService.OnLevelUp -= OnLevelUp;
+        }
 
         private void Update()
         {
             if (!_isNeedChange) return;
 
-            if (_camera.transform.position.y > _deepMinCam) return;
-            SetTexture(_zone.AliveTexture);
+            if (_camera.transform.position.y < _deepMinCam)
+                SetLevel();
+        }
+
+        private void OnLevelUp(int level)
+        {
+            _level = level;
+            _isNeedChange = true;
+            if (_camera.transform.position.y < _deepMinCam)
+                SetLevel();
+        }
+
+        private void SetLevel()
+        {
+            if (_currentLevel != null)
+                _currentLevel.gameObject.SetActive(false);
+            _currentLevel = _levels[_level];
+            _currentLevel.gameObject.SetActive(true);
+
             _isNeedChange = false;
         }
 
-        public void SetZone(DeepZone zone)
-        {
-            if (_zone != null && _zone.Level >= zone.Level) return;
-
-            _zone = zone;
-            if (_camera.transform.position.y < _deepMinCam)
-                SetTexture(_zone.AliveTexture);
-            else
-                _isNeedChange = true;
-        }
-
         private void OnDied() =>
-            SetTexture(_zone.DeadTexture);
-
-        private void SetTexture(Texture texture) =>
-            _mesh.material.SetTexture(MainTex, texture);
+            _currentLevel.Die();
     }
 }

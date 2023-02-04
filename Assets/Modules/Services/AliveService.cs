@@ -13,11 +13,16 @@ namespace Modules.Services
         private static AliveService _self;
         
         static public event Action OnDied;
+        static public event Action<int> OnLevelUp;
+        
         static public void Spawn(RootHead rootHead) =>
             Inst.AddHead(rootHead);
         
         static public void Die(RootHead rootHead) =>
             Inst.RemoveHead(rootHead);
+
+        static public void SetDeepLevel(int level) =>
+            Inst.SetLevel(level);
         
         static public void Dispose() =>
             _self = null;
@@ -26,6 +31,7 @@ namespace Modules.Services
         #region Instance
         
         private readonly List<RootHead> _aliveHeads = new List<RootHead>();
+        private int _deepLevel = -1;
         
         private void AddHead(RootHead rootHead) =>
             _aliveHeads.Add(rootHead);
@@ -37,6 +43,13 @@ namespace Modules.Services
         
             OnDied?.Invoke();
             Debug.Log("Die");
+        }
+
+        private void SetLevel(int level)
+        {
+            if (level <= _deepLevel) return;
+            _deepLevel = level;
+            OnLevelUp?.Invoke(_deepLevel);
         }
         
         #endregion
