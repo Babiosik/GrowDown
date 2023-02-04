@@ -10,6 +10,8 @@ namespace Modules.Spawners.Scripts
 
         private void Start()
         {
+            if (_prefabs.Length == 0) return;
+            
             for (var i = 0; i < _count; i++)
                 Spawn();
         }

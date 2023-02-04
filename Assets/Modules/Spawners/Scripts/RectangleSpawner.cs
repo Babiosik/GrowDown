@@ -10,6 +10,8 @@ namespace Modules.Spawners.Scripts
 
         private void Start()
         {
+            if (_spawnable.Length == 0) return;
+            
             for (var i = 0; i < _count; i++)
                 Spawn();
         }
@@ -21,7 +23,9 @@ namespace Modules.Spawners.Scripts
             var local = new Vector3(x, y, 0);
             Vector3 world = transform.position + local;
 
-            Instantiate(_spawnable[Random.Range(0, _spawnable.Length)], world, Quaternion.identity);
+            int rand = Random.Range(0, _spawnable.Length); 
+            Debug.Log($"{rand}:{_spawnable.Length}");
+            Instantiate(_spawnable[rand], world, Quaternion.identity);
         }
     }
 }
