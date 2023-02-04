@@ -14,6 +14,7 @@ namespace Modules.Services
         
         static public event Action OnDied;
         static public event Action<int> OnLevelUp;
+        static public int GetCurrentLevel => Inst._deepLevel;
         
         static public void Spawn(RootHead rootHead) =>
             Inst.AddHead(rootHead);

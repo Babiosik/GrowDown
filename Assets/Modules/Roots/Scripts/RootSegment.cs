@@ -21,7 +21,6 @@ namespace Modules.Roots.Scripts
         private IRootSegment _nextSegment;
 
         private bool _isPause = true;
-        public bool IsPreDied { get; private set; } = false;
         public bool IsDied { get; private set; } = false;
         public event Action OnDie;
 
@@ -34,7 +33,7 @@ namespace Modules.Roots.Scripts
             _rootSegmentMesh.UpdateGross(_percentGross);
             _rootHead.Move(_percentGross, _rootSegmentMesh.GetHeadPositionOffset);
             
-            ResourcesService.Water.Value -= _waterEat * Time.deltaTime;
+            ResourcesService.Water.Value -= _waterEat * (AliveService.GetCurrentLevel + 1) * Time.deltaTime;
             if (ResourcesService.Water.Value <= 0)
             {
                 _rootHead.Die();
