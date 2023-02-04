@@ -24,7 +24,7 @@ namespace Modules.Spawners.Scripts
             Vector3 world = transform.position + local;
 
             int rand = Random.Range(0, _spawnable.Length);
-            Instantiate(_spawnable[rand], world, Quaternion.identity);
+            Instantiate(_spawnable[rand], world, Quaternion.identity, transform);
         }
     }
 }

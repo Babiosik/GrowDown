@@ -26,7 +26,7 @@ namespace Modules.Spawners.Scripts
             var local = new Vector3(x, y, 0);
             Vector3 world = transform.position + local;
 
-            Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], world, Quaternion.identity);
+            Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], world, Quaternion.identity, transform);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Modules.Roots.Scripts;
 using Modules.Services;
 using UnityEngine;
@@ -39,8 +40,8 @@ namespace Modules.Plants.Scripts
         {
             if (_isStarted)
                 _currentLevel.Drink(Time.deltaTime);
+            
             if (!_isNeedChange) return;
-
             if (_camera.transform.position.y < _deepMinCam)
                 SetLevel();
         }
@@ -66,11 +67,12 @@ namespace Modules.Plants.Scripts
         private void OnDied() =>
             _currentLevel.Die();
 
-        private void OnFinish(RootHead rootHead)
+        private async void OnFinish(RootHead rootHead)
         {
+            _isNeedChange = false;
+            await UniTask.Delay(400);
             _currentLevel.gameObject.SetActive(false);
             _finishLevel.gameObject.SetActive(true);
-            _finishLevel.enabled = false;
         }
 
         private void OnStarted() =>
