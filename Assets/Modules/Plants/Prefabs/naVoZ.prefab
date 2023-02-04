@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98020c2a02e14266ae6656acbf947521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterPerSec: 0.1
+  _waterPerSec: 0.15
   _dead: {fileID: 21300000, guid: 37e02bc3f56f6d146941f7b350fe9c01, type: 3}
 --- !u!95 &2032058075
 Animator:
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98020c2a02e14266ae6656acbf947521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterPerSec: 0.2
+  _waterPerSec: 0.3
   _dead: {fileID: 21300000, guid: 16372f0db8b073441a0144d5662917e7, type: 3}
 --- !u!95 &1711451413
 Animator:
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98020c2a02e14266ae6656acbf947521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterPerSec: 0.4
+  _waterPerSec: 0.6
   _dead: {fileID: 21300000, guid: 34e77c99cb8f70a43ba17af989e75b9a, type: 3}
 --- !u!95 &1031910992
 Animator:
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98020c2a02e14266ae6656acbf947521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterPerSec: 0.3
+  _waterPerSec: 0.45
   _dead: {fileID: 21300000, guid: 66afebbf83dcf2f40bfe152cd847154e, type: 3}
 --- !u!95 &1583224697
 Animator:
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98020c2a02e14266ae6656acbf947521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterPerSec: 0.5
+  _waterPerSec: 0.75
   _dead: {fileID: 21300000, guid: 8704bf54eb0100248b74d1aa44c0ea14, type: 3}
 --- !u!1 &9149800807857163549
 GameObject:
