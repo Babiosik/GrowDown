@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.1
-  _waterEat: 0.1
+  _waterEat: 0.05
 --- !u!82 &4351176053294889877
 AudioSource:
   m_ObjectHideFlags: 0
