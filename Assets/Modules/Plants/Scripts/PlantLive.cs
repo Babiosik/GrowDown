@@ -12,6 +12,7 @@ namespace Modules.Plants.Scripts
 
         private PlantLevel _currentLevel;
         private bool _isNeedChange;
+        private bool _isStarted;
         private int _level;
 
         private void Start() =>
@@ -22,6 +23,7 @@ namespace Modules.Plants.Scripts
             AliveService.OnDied += OnDied;
             AliveService.OnLevelUp += OnLevelUp;
             AliveService.OnFinish += OnFinish;
+            AliveService.OnStart += OnStarted;
         }
 
         private void OnDisable()
@@ -29,10 +31,13 @@ namespace Modules.Plants.Scripts
             AliveService.OnDied -= OnDied;
             AliveService.OnLevelUp -= OnLevelUp;
             AliveService.OnFinish += OnFinish;
+            AliveService.OnStart -= OnStarted;
         }
 
         private void Update()
         {
+            if (_isStarted)
+                _currentLevel.Drink(Time.deltaTime);
             if (!_isNeedChange) return;
 
             if (_camera.transform.position.y < _deepMinCam)
@@ -62,5 +67,8 @@ namespace Modules.Plants.Scripts
 
         private void OnFinish(RootHead rootHead) =>
             _currentLevel.enabled = false;
+        
+        private void OnStarted() =>
+            _isStarted = true;
     }
 }

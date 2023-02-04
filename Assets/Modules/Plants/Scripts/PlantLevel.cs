@@ -18,17 +18,14 @@ namespace Modules.Plants.Scripts
             _animator = GetComponent<Animator>();
         }
 
-        private void Update()
-        {
-            if (!_animator.enabled) return;
-            ResourcesService.Water.Value -= _waterPerSec * Time.deltaTime;
-        }
-
         public void Die()
         {
             if (_animator != null)
                 _animator.enabled = false;
             _spriteRenderer.sprite = _dead;
         }
+        
+        public void Drink(float deltaTime) =>
+            ResourcesService.Water.Value -= _waterPerSec * deltaTime;
     }
 }

@@ -13,6 +13,7 @@ namespace Modules.Services
         private static AliveService _self;
         
         static public event Action OnDied;
+        static public event Action OnStart;
         static public event Action<RootHead> OnFinish;
         static public event Action<int> OnLevelUp;
         static public int GetCurrentLevel => Inst._deepLevel;
@@ -41,9 +42,13 @@ namespace Modules.Services
         private readonly List<RootHead> _aliveHeads = new List<RootHead>();
         private int _deepLevel = -1;
         
-        private void AddHead(RootHead rootHead) =>
+        private void AddHead(RootHead rootHead)
+        {
+            if (_aliveHeads.Count == 0) 
+                OnStart?.Invoke();
             _aliveHeads.Add(rootHead);
-        
+        }
+
         private void RemoveHead(RootHead rootHead) =>
             _aliveHeads.Remove(rootHead);
 
