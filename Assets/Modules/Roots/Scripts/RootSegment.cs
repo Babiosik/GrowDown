@@ -73,7 +73,6 @@ namespace Modules.Roots.Scripts
         {
             _isPause = true;
             IsDied = true;
-            OnDie?.Invoke();
             _rootSegmentMesh
                 .Die()
                 .GetAwaiter()
@@ -84,6 +83,7 @@ namespace Modules.Roots.Scripts
                     else
                         _prevSegment?.Die();
                 });
+            OnDie?.Invoke();
         }
 
         private void Clone()

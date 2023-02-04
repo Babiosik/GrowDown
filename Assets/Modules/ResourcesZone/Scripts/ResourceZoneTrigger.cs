@@ -64,13 +64,13 @@ namespace Modules.ResourcesZone.Scripts
         public void OnSegmentExit(RootSegment rootSegment)
         {
             rootSegment.OnDie -= SegmentOnDie;
-            var res = _rootSegments.Remove(rootSegment);
-            Debug.Log(res);
+            bool res = _rootSegments.Remove(rootSegment);
         }
 
         private void SegmentOnDie()
         {
-            foreach (RootSegment rootSegment in _rootSegments.Where(segment => segment.IsDied))
+            IEnumerable<RootSegment> temp = _rootSegments.Where(segment => segment.IsDied);
+            foreach (RootSegment rootSegment in temp)
             {
                 rootSegment.OnDie -= SegmentOnDie;
                 _rootSegments.Remove(rootSegment);

@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Modules.Services;
 using UnityEngine;
 
 namespace Modules.Roots.Scripts
@@ -57,6 +58,7 @@ namespace Modules.Roots.Scripts
 
         public void UpdateGross(float grossPercent)
         {
+            grossPercent = Mathf.Clamp01(grossPercent);
             _uv.x = grossPercent;
             _scale.x = Mathf.Lerp(0, _size.x, grossPercent);
             _position.x = _scale.x / 2;
@@ -75,6 +77,7 @@ namespace Modules.Roots.Scripts
             await UniTask.WaitForEndOfFrame();
 
             obj.DieInternal();
+            if (ResourcesService.Water.Value < 1) _uv.x = 0.000001f;
             while(_uv.x > 0)
             {
                 await UniTask.WaitForEndOfFrame();
