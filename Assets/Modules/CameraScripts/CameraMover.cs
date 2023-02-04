@@ -24,6 +24,7 @@ namespace Modules.CameraScripts
             _inputSystem = InputService.InputSystem;
             _camera = GetComponent<Camera>();
             AliveService.OnLevelUp += UnlockNewZone;
+            UnlockNewZone(0);
         }
 
         private void Update()

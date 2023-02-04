@@ -22,7 +22,7 @@ namespace Modules.DeathZone.Scripts
             if (_randomScale)
                 transform.localScale = Vector3.one * Random.Range(_randomScaleSize.x, _randomScaleSize.y);
             
-            transform.position += Vector3.forward;
+            transform.position += Vector3.forward * 0.0001f;
         }
         
         private void OnTriggerEnter(Collider other)
