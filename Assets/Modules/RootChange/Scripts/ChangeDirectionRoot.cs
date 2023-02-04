@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Modules.Roots.Scripts;
 using Modules.Services;
 using Modules.Singletones.Factories;
@@ -93,6 +94,7 @@ namespace Modules.RootChange.Scripts
         private void OnResourcesChange()
         {
             if (ResourcesService.IsCanChangeDirection) return;
+            _selectedHead.SetPauseGross(false);
             Cancel();
         }
     }
