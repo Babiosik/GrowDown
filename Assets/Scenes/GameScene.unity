@@ -923,6 +923,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810832563}
   m_CullTransparentMesh: 1
+--- !u!4 &825528955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5921350033880231927, guid: 011815b4209a5a8469db345d34fcfe80, type: 3}
+  m_PrefabInstance: {fileID: 9149800807820626638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &830085662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1285,7 @@ MonoBehaviour:
   - {fileID: 977025640}
   _hud: {fileID: 942199278}
   _camera: {fileID: 519420031}
-  _target: {fileID: 106137556}
+  _target: {fileID: 825528955}
   _targetZoom: 10
   _targetZoomRoot: 7
 --- !u!225 &986531914
@@ -3387,7 +3392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5502005481755066682, guid: ed9587220a355d94c9c91247bc607898, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.561459
+      value: 6.24
       objectReference: {fileID: 0}
     - target: {fileID: 5502005481755066682, guid: ed9587220a355d94c9c91247bc607898, type: 3}
       propertyPath: m_LocalPosition.z

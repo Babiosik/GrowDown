@@ -9,6 +9,7 @@ namespace Modules.Plants.Scripts
         [SerializeField] private float _deepMinCam;
         [SerializeField] private Camera _camera;
         [SerializeField] private PlantLevel[] _levels;
+        [SerializeField] private PlantLevel _finishLevel;
 
         private PlantLevel _currentLevel;
         private bool _isNeedChange;
@@ -65,9 +66,13 @@ namespace Modules.Plants.Scripts
         private void OnDied() =>
             _currentLevel.Die();
 
-        private void OnFinish(RootHead rootHead) =>
-            _currentLevel.enabled = false;
-        
+        private void OnFinish(RootHead rootHead)
+        {
+            _currentLevel.gameObject.SetActive(false);
+            _finishLevel.gameObject.SetActive(true);
+            _finishLevel.enabled = false;
+        }
+
         private void OnStarted() =>
             _isStarted = true;
     }
