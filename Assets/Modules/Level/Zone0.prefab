@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2786928919781070974}
   - component: {fileID: 4362424697616165893}
   - component: {fileID: 8315640610635883177}
+  - component: {fileID: -7751728008498441464}
   m_Layer: 0
   m_Name: Zone0
   m_TagString: Untagged
@@ -45,9 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e97c53d5f5438599709468f989584b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _plant: {fileID: 0}
-  _aliveTexture: {fileID: 0}
-  _deadTexture: {fileID: 0}
   _level: 0
 --- !u!65 &8315640610635883177
 BoxCollider:
@@ -60,5 +58,20 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 70, y: 20, z: 1}
+  m_Size: {x: 50, y: 20, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7751728008498441464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866808353467149948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcfac2ee4c514459b633bc4d677106ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnable: []
+  _size: {x: 25, y: 10}
+  _count: 100
