@@ -12,7 +12,7 @@ namespace Modules.Roots.Scripts
         private const float DieAnimationPerTick = 2f;
         
         [SerializeField] private AnimationCurve _pathPositionOffset;
-        [SerializeField] private Texture _diedTexture;
+        [SerializeField] private GameObject _diedSegment;
 
         private Vector2 _uv;
         private Vector3 _size;
@@ -20,7 +20,7 @@ namespace Modules.Roots.Scripts
         private Vector3 _position;
         private Material _localMaterial;
         private MeshRenderer _meshRenderer;
-        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
+        private Transform _diedClone;
 
         public Vector3 Size => _size;
         public float GetHeadPositionOffset => _pathPositionOffset.Evaluate(_scale.x);
@@ -55,25 +55,30 @@ namespace Modules.Roots.Scripts
             transform.localPosition = _position;
         }
 
-        [Obsolete("Obsolete")]
-        async public UniTask Die()
+        async public UniTask Die(float to)
         {
-            var obj = Instantiate(gameObject, transform.position + Vector3.forward * 0.00001f, transform.rotation, transform.parent)
-                .GetComponent<RootSegmentMesh>();
-
+            if (_diedClone == null)
+            {
+                _diedClone = Instantiate(_diedSegment, transform.position + Vector3.forward * 0.00001f, transform.rotation, transform.parent).transform;
+                _diedClone.localScale = transform.localScale;
+                _diedClone.GetComponent<RootDiedSegmentMesh>().SetUv(_uv);
+            }
+            
             await UniTask.WaitForEndOfFrame();
-
-            obj.DieInternal();
             if (ResourcesService.Water.Value < 1) _uv.x = 0.000001f;
-            while(_uv.x > 0)
+            to /= _size.x;
+            while(_uv.x > to)
             {
                 await UniTask.WaitForEndOfFrame();
                 UpdateGross(_uv.x - DieAnimationPerTick * Time.deltaTime);
             }
+            if (_uv.x <= 0)
+            {
+                Collider[] children = GetComponentsInChildren<Collider>();
+                foreach (Collider child in children)
+                    child.gameObject.SetActive(false);
+            }
         }
-        
-        private void DieInternal() =>
-            _localMaterial.SetTexture(MainTex, _diedTexture);
 
         private void SetClonedMaterial()
         {

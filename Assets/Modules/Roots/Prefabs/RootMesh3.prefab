@@ -425,7 +425,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _diedTexture: {fileID: 2800000, guid: 0d94d26c07427c142b8441cec8975a5e, type: 3}
+  _diedSegment: {fileID: 5326782280324936875, guid: b619b4ade2d634f4dab565fc9e98dd73, type: 3}
 --- !u!60 &800107566096087670
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ namespace Modules.DeathZone.Scripts
             
             if (other.transform.parent.TryGetComponent(out RootHead rootHead))
             {
-                rootHead.Die();
+                rootHead.Die(null);
             }
         }
     }

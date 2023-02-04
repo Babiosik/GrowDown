@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Modules.CameraScripts;
 using Modules.Services;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ namespace Modules.Roots.Scripts
         private Vector3 _end;
         private readonly static int MainTex = Shader.PropertyToID("_MainTex");
 
-        public bool IsDied { get; private set; } = false;
+        public bool IsDied { get; protected set; } = false;
         public RootSegment GetCurrentSegment => _currentSegment;
 
         private void Start()
@@ -69,13 +68,14 @@ namespace Modules.Roots.Scripts
         public void SetPauseGross(bool pause) =>
             _currentSegment.SetPauseGross(pause);
         
-        async public void Die()
+        async public void Die(IRootSegment from)
         {
             IsDied = true;
             _audioSource.Play();
             await UniTask.Delay(300);
             SetTexture(_diedTexture);
-            _currentSegment.Die();
+            AliveService.Die(this);
+            _currentSegment.Die(null);
         }
         
         private void SetTexture(Texture texture) =>

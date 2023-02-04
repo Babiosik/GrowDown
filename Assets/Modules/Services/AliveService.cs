@@ -23,6 +23,9 @@ namespace Modules.Services
         static public void Die(RootHead rootHead) =>
             Inst.RemoveHead(rootHead);
 
+        static public void DieZeroSegment() =>
+            OnDied?.Invoke();
+
         static public void SetDeepLevel(int level) =>
             Inst.SetLevel(level);
 
@@ -41,14 +44,8 @@ namespace Modules.Services
         private void AddHead(RootHead rootHead) =>
             _aliveHeads.Add(rootHead);
         
-        private void RemoveHead(RootHead rootHead)
-        {
+        private void RemoveHead(RootHead rootHead) =>
             _aliveHeads.Remove(rootHead);
-            if (_aliveHeads.Count > 0) return;
-        
-            OnDied?.Invoke();
-            Debug.Log("Die");
-        }
 
         private void SetLevel(int level)
         {

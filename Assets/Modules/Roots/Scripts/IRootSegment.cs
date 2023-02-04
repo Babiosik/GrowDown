@@ -2,6 +2,7 @@ namespace Modules.Roots.Scripts
 {
     public interface IRootSegment
     {
-        void Die();
+        bool IsDied { get; }
+        void Die(IRootSegment from);
     }
 }

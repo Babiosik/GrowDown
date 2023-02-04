@@ -8,10 +8,13 @@ namespace Modules.Roots.Scripts
         [SerializeField] private MeshRenderer _mesh;
         [SerializeField] private Texture _diedTexture;
 
-        private RootHead _rootHead;
+        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
         private IRootSegment _prevSegment;
         private IRootSegment _nextSegment;
-        private readonly static int MainTex = Shader.PropertyToID("_MainTex");
+        private RootHead _rootHead;
+        private bool _isInMiddle;
+        
+        public bool IsDied { get; private set; }
 
         public void Init(RootHead head, IRootSegment prev, IRootSegment next)
         {
@@ -19,14 +22,17 @@ namespace Modules.Roots.Scripts
             _prevSegment = prev;
             _nextSegment = next;
         }
-
-        public void Die()
+        public void InitMiddle(RootHead head, IRootSegment prev, IRootSegment next)
         {
+            Init(head, prev, next);
+            _isInMiddle = true;
+        }
+
+        public void Die(IRootSegment from)
+        {
+            IsDied = true;
             _mesh.material.SetTexture(MainTex, _diedTexture);
-            if (_prevSegment == null)
-                AliveService.Die(_rootHead);
-            else
-                _prevSegment?.Die();
+            _prevSegment.Die(this);
         }
     }
 }

@@ -92,7 +92,8 @@ namespace Modules.RootChange.Scripts
             {
                 _selectedSegment.OnDie -= Cancel;
                 joint = RootFactory.CreateRootJoint(transform.position);
-                joint.Init(head, null, segment);
+                joint.InitMiddle(head, _selectedSegment, segment);
+                _selectedSegment.AddMiddlePoint(joint);
             }
 
             segment.Init(joint, head, transform.position, _angleLines[2].transform.rotation);
