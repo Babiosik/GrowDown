@@ -11,6 +11,7 @@ namespace Modules.CameraScripts
         [SerializeField] private float _scrollSensitivity = 1f;
         [SerializeField] private float _camZoomMin = 1;
         [SerializeField] private float _camZoomMax = 5;
+        [SerializeField] private float _sizePerLevel = 20;
 
         [Header("x=xMin;y=yMin;z=xMax;w=yMax")]
         [SerializeField] private Vector4 _borderMove;
@@ -18,10 +19,11 @@ namespace Modules.CameraScripts
         private InputSystem _inputSystem;
         private Camera _camera;
 
-        private void Awake()
+        private void Start()
         {
             _inputSystem = InputService.InputSystem;
             _camera = GetComponent<Camera>();
+            AliveService.OnLevelUp += UnlockNewZone;
         }
 
         private void Update()
@@ -54,5 +56,8 @@ namespace Modules.CameraScripts
             scroll += _camera.orthographicSize;
             _camera.orthographicSize = Mathf.Clamp(scroll, _camZoomMin, _camZoomMax);
         }
+        
+        private void UnlockNewZone(int level) =>
+            _borderMove.y = -_sizePerLevel * (level + 1);
     }
 }

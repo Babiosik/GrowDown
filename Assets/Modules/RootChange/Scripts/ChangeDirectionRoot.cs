@@ -54,25 +54,19 @@ namespace Modules.RootChange.Scripts
             InputService.AllowControl = false;
             _inputSystem.All.DoButton.performed += OnApply;
             _inputSystem.All.CancelButton.performed += OnCancel;
+            ResourcesService.OnResourcesChange += OnResourcesChange;
         }
 
         private void OnCancel(InputAction.CallbackContext callbackContext)
         {
-            _inputSystem.All.CancelButton.performed -= OnCancel;
-            _inputSystem.All.DoButton.performed -= OnApply;
-            InputService.AllowControl = true;
-
-            SetActive(false);
+            Cancel();
             _selectedHead.SetPauseGross(false);
         }
 
         private void OnApply(InputAction.CallbackContext obj)
         {
-            _inputSystem.All.CancelButton.performed -= OnCancel;
-            _inputSystem.All.DoButton.performed -= OnApply;
-            InputService.AllowControl = true;
-
-            SetActive(false);
+            Cancel();
+            ResourcesService.Water.Value -= ResourcesService.ChangeDirectionResource;
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
             RootJoint joint = RootFactory.CreateRootJoint(_selectedHead.transform.position);
@@ -80,13 +74,25 @@ namespace Modules.RootChange.Scripts
             segment.Init(joint, _selectedHead, transform.position, _angleLines[2].transform.rotation);
         }
 
+        private void Cancel()
+        {
+            ResourcesService.OnResourcesChange -= OnResourcesChange;
+            _inputSystem.All.CancelButton.performed -= OnCancel;
+            _inputSystem.All.DoButton.performed -= OnApply;
+            InputService.AllowControl = true;
+            SetActive(false);
+        }
+
         private void SetActive(bool active)
         {
             _isActive = active;
             gameObject.SetActive(active);
-            // foreach (GameObject line in _angleLines)
-            //     line.SetActive(active);
         }
 
+        private void OnResourcesChange()
+        {
+            if (ResourcesService.IsCanChangeDirection) return;
+            Cancel();
+        }
     }
 }

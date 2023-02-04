@@ -4,12 +4,20 @@ namespace Modules.Services
 {
     static public class ResourcesService
     {
+        static public event Action OnResourcesChange;
         static public Resource<float> Water { get; } = new Resource<float>(100);
+        static public bool IsCanChangeDirection => Water.Value > ChangeDirectionResource;
+        static public int ChangeDirectionResource => 2;
+        static public bool IsCanStartRoot => Water.Value > 5;
+        static public int StartRootResource => 5;
         
         static public void Dispose()
         {
             Water.Value = 100;
         }
+
+        static public void Update() =>
+            OnResourcesChange?.Invoke();
     }
 
     public class Resource<T>
@@ -25,6 +33,7 @@ namespace Modules.Services
             {
                 _value = value;
                 OnChange?.Invoke(_value);
+                ResourcesService.Update();
             }
         }
         

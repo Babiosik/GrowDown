@@ -58,30 +58,30 @@ namespace Modules.RootChange.Scripts
             _inputSystem.All.DoButton.performed += OnApply;
 
             if (_isFirst) return;
+            ResourcesService.OnResourcesChange += OnResourcesChange;
             _inputSystem.All.CancelButton.performed += OnCancel;
             _selectedSegment.OnDie += Cancel;
         }
 
         private void Cancel()
         {
-            _selectedSegment.OnDie -= Cancel;
+            if (_selectedSegment != null)
+                _selectedSegment.OnDie -= Cancel;
+            ResourcesService.OnResourcesChange -= OnResourcesChange;
             _inputSystem.All.CancelButton.performed -= OnCancel;
             _inputSystem.All.DoButton.performed -= OnApply;
             InputService.AllowControl = true;
-
             SetActive(false);
         }
-        
+
         private void OnCancel(InputAction.CallbackContext callbackContext) =>
             Cancel();
 
         private void OnApply(InputAction.CallbackContext obj)
         {
-            _inputSystem.All.CancelButton.performed -= OnCancel;
-            _inputSystem.All.DoButton.performed -= OnApply;
-            InputService.AllowControl = true;
-
-            SetActive(false);
+            Cancel();
+            
+            ResourcesService.Water.Value -= ResourcesService.StartRootResource;
             RootHead head = RootFactory.CreateRootHead();
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
@@ -102,9 +102,12 @@ namespace Modules.RootChange.Scripts
         {
             _isActive = active;
             gameObject.SetActive(active);
-            // foreach (GameObject line in _angleLines)
-            //     line.SetActive(active);
         }
 
+        private void OnResourcesChange()
+        {
+            if (ResourcesService.IsCanStartRoot) return;
+            Cancel();
+        }
     }
 }

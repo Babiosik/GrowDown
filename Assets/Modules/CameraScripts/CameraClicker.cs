@@ -56,7 +56,7 @@ namespace Modules.CameraScripts
             
             var rootHead = obj.parent.GetComponent<RootHead>();
             if (rootHead == null) return false;
-            if (rootHead.IsDied) return true;
+            if (rootHead.IsDied || !ResourcesService.IsCanChangeDirection) return true;
             
             _changeDirectionRoot.Triggered(rootHead);           
             
@@ -69,7 +69,7 @@ namespace Modules.CameraScripts
             
             var rootSegment = obj.parent.parent.GetComponent<RootSegment>();
             if (rootSegment == null) return false;
-            if (rootSegment.IsDied) return true;
+            if (rootSegment.IsDied || !ResourcesService.IsCanStartRoot) return true;
 
             _spawnRoot.transform.position = mouseWorldPos;
             _spawnRoot.Triggered(rootSegment);
