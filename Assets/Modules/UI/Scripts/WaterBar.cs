@@ -32,7 +32,7 @@ namespace Modules.UI.Scripts
         {
             float percent = Mathf.Clamp(value / _maxValue, 0, 1);
             _bar.fillAmount = percent;
-            _bar.rectTransform.anchoredPosition = _startPosition + Vector2.left * _maxOffset * (1 - percent);
+            // _bar.rectTransform.anchoredPosition = _startPosition + Vector2.left * _maxOffset * (1 - percent);
             
             switch(_isDangerous)
             {
