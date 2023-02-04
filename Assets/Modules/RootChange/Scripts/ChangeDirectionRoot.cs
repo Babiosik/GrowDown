@@ -70,6 +70,7 @@ namespace Modules.RootChange.Scripts
             RootSegment segment = RootFactory.CreateRootSegment();
             RootFactory.CreateRootSegmentMesh(segment);
             RootJoint joint = RootFactory.CreateRootJoint(_selectedHead.transform.position);
+            _selectedHead.GetCurrentSegment.Rotate(joint);
             joint.Init(_selectedHead, _selectedHead.GetCurrentSegment, segment);
             segment.Init(joint, _selectedHead, transform.position, _angleLines[2].transform.rotation);
         }

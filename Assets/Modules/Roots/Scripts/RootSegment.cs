@@ -105,7 +105,7 @@ namespace Modules.Roots.Scripts
         {
             if (from == null)
                 SetPauseGross(true);
-            else if (from != _nextSegment && _nextSegment is { IsDied: false })
+            else if (_nextSegment is not { IsDied: true })
                 return;
 
             IsDied = _middleJoints.All(joint => joint.IsDied);
@@ -126,6 +126,9 @@ namespace Modules.Roots.Scripts
             _middleJoints.Add(joint);
             joint.transform.SetParent(transform);
         }
+
+        public void Rotate(RootJoint joint) =>
+            _nextSegment = joint;
 
         private void Clone()
         {
@@ -154,7 +157,6 @@ namespace Modules.Roots.Scripts
                         _prevSegment?.Die(this);
                 });
         }
-
         
         private float GetMax(float x, RootJoint joint) =>
             joint.IsDied ? x : Mathf.Max(x, joint.transform.localPosition.x);
