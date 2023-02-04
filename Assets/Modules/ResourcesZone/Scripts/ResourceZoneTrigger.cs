@@ -22,7 +22,7 @@ namespace Modules.ResourcesZone.Scripts
         [SerializeField] private bool _randomScale;
         [SerializeField] private Vector2 _randomScaleSize;
 
-        private HashSet<RootSegment> _rootSegments = new HashSet<RootSegment>();
+        [SerializeField] private List<RootSegment> _rootSegments = new List<RootSegment>();
         private Vector3 _fullScale;
         private float _fullAmount;
 
@@ -32,7 +32,7 @@ namespace Modules.ResourcesZone.Scripts
                 transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
             if (_randomScale)
                 transform.localScale = Vector3.one * Random.Range(_randomScaleSize.x, _randomScaleSize.y);
-            
+
             transform.position += Vector3.forward * 0.0001f;
             _fullScale = transform.localScale;
             _fullAmount = _amount;
@@ -42,41 +42,28 @@ namespace Modules.ResourcesZone.Scripts
         {
             if (_rootSegments.Count == 0 || _amount <= 0) return;
 
+            _rootSegments.RemoveAll(segment => segment.IsDied);
+
+            if (_rootSegments.Count == 0) return;
+
             float diff = _speedEat * Time.deltaTime * _rootSegments.Count;
             if (_amount < diff) diff = _amount;
-            
+
             ResourcesService.Water.Value += diff;
             _amount -= diff;
             transform.localScale = Vector3.Lerp(Vector3.zero, _fullScale, _amount / _fullAmount);
 
             if (_amount > 0) return;
-
-            foreach (RootSegment rootSegment in _rootSegments)
-                rootSegment.OnDie -= SegmentOnDie;
+            
             Destroy(gameObject);
         }
 
-        public void OnSegmentEnter(RootSegment rootSegment)
-        {
-            rootSegment.OnDie += SegmentOnDie;
+        public void OnSegmentEnter(RootSegment rootSegment) =>
             _rootSegments.Add(rootSegment);
-        }
-        
-        public void OnSegmentExit(RootSegment rootSegment)
-        {
-            rootSegment.OnDie -= SegmentOnDie;
-            bool res = _rootSegments.Remove(rootSegment);
-        }
 
-        private void SegmentOnDie()
-        {
-            IEnumerable<RootSegment> temp = _rootSegments.Where(segment => segment.IsDied);
-            foreach (RootSegment rootSegment in temp)
-            {
-                rootSegment.OnDie -= SegmentOnDie;
-                _rootSegments.Remove(rootSegment);
-            }
-            
-        }
+        public void OnSegmentExit(RootSegment rootSegment) =>
+            _rootSegments.Remove(rootSegment);
+
+
     }
 }

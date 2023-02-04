@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Modules.Roots.Scripts;
 using UnityEngine;
@@ -9,7 +10,8 @@ namespace Modules.ResourcesZone.Scripts
         private const string RootHeadTag = "RootHead";
         private const string RootSegmentTag = "RootSegment";
         
-        private List<RootSegment> _rootSegmentColliders = new List<RootSegment>();
+        private readonly List<RootSegment> _rootSegmentColliders = new List<RootSegment>();
+        private readonly HashSet<RootSegment> _rootSegmentCollidersHash = new HashSet<RootSegment>();
         private ResourceZoneTrigger _zone;
 
         private void Start()
@@ -32,13 +34,24 @@ namespace Modules.ResourcesZone.Scripts
                 SegmentExited(other.transform);
         }
 
+        private void OnDestroy()
+        {
+            foreach (RootSegment rootSegment in _rootSegmentCollidersHash)
+                rootSegment.OnDie -= SegmentOnDie;
+        }
+
         private void HeadEntered(Transform other)
         {
             if (!other.parent.TryGetComponent(out RootHead rootHead))
                 return;
 
             if (rootHead.IsDied) return;
-            _zone.OnSegmentEnter(rootHead.GetCurrentSegment);
+
+            RootSegment rootSegment = rootHead.GetCurrentSegment;
+            
+            if (_rootSegmentCollidersHash.Contains(rootSegment)) return;
+            _rootSegmentCollidersHash.Add(rootSegment);
+            _zone.OnSegmentEnter(rootSegment);
         }
         
         private void SegmentEntered(Transform other)
@@ -46,6 +59,8 @@ namespace Modules.ResourcesZone.Scripts
             if (!other.parent.parent.TryGetComponent(out RootSegment rootSegment))
                 return;
 
+            if (!_rootSegmentColliders.Contains(rootSegment))
+                rootSegment.OnDie += SegmentOnDie;
             _rootSegmentColliders.Add(rootSegment);
         }
         
@@ -55,10 +70,27 @@ namespace Modules.ResourcesZone.Scripts
                 return;
             
             _rootSegmentColliders.Remove(rootSegment);
-            RootSegment segment = _rootSegmentColliders.Find(segment => segment == rootSegment);
-            if (segment != null) return;
-            
+            if (_rootSegmentColliders.Contains(rootSegment)) return;
+
+            rootSegment.OnDie -= SegmentOnDie;
+            _rootSegmentCollidersHash.Remove(rootSegment);
             _zone.OnSegmentExit(rootSegment);
+        }
+
+        private void SegmentOnDie()
+        {
+            while(true)
+            {
+                RootSegment rootSegment = _rootSegmentColliders.Find(segment => segment.IsDied);
+
+                if (rootSegment == null)
+                    return;
+
+                _rootSegmentColliders.RemoveAll(segment => segment == rootSegment);
+                _rootSegmentCollidersHash.Remove(rootSegment);
+                _zone.OnSegmentExit(rootSegment);
+                rootSegment.OnDie -= SegmentOnDie;
+            }
         }
     }
 }

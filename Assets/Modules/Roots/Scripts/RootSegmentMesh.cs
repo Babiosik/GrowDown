@@ -71,7 +71,7 @@ namespace Modules.Roots.Scripts
         [Obsolete("Obsolete")]
         async public UniTask Die()
         {
-            var obj = Instantiate(gameObject, transform.position + Vector3.forward, transform.rotation, transform.parent)
+            var obj = Instantiate(gameObject, transform.position + Vector3.forward * 0.00001f, transform.rotation, transform.parent)
                 .GetComponent<RootSegmentMesh>();
 
             await UniTask.WaitForEndOfFrame();
