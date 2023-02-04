@@ -21,6 +21,8 @@ namespace Modules.DeathZone.Scripts
                 transform.rotation = Quaternion.Euler(0, 0, Random.Range(-_randomHalfRotationSize, _randomHalfRotationSize));
             if (_randomScale)
                 transform.localScale = Vector3.one * Random.Range(_randomScaleSize.x, _randomScaleSize.y);
+            
+            transform.position += Vector3.forward;
         }
         
         private void OnTriggerEnter(Collider other)

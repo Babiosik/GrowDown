@@ -33,6 +33,7 @@ namespace Modules.ResourcesZone.Scripts
             if (_randomScale)
                 transform.localScale = Vector3.one * Random.Range(_randomScaleSize.x, _randomScaleSize.y);
             
+            transform.position += Vector3.forward;
             _fullScale = transform.localScale;
             _fullAmount = _amount;
         }
