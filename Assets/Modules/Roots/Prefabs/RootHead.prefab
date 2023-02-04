@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 790655097686688049}
   - component: {fileID: 3255464518446440341}
   - component: {fileID: 6855225511588664401}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RootHeadMesh
   m_TagString: RootHead
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1964738035057268404}
   - component: {fileID: 1964738035057268405}
   - component: {fileID: 1964738035057268299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RootHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}

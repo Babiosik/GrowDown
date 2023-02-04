@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1411202055950611912}
   - component: {fileID: 2136522250059294080}
   - component: {fileID: 568391429084190272}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RootJointMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1411202056619559288}
   - component: {fileID: 2412776566727329224}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RootJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

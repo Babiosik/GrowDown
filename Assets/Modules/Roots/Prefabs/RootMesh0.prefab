@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4556716144370460277}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7891577574239194963}
   - component: {fileID: 1047448094383671426}
   - component: {fileID: 7816102178640656398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: RootSegment
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 5326782280324936876}
   - component: {fileID: 5326782280324936877}
   - component: {fileID: 5326782280324936878}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RootMesh0
   m_TagString: RootSegment
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 982754796331571511}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
