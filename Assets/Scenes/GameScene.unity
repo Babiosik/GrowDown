@@ -257,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hud: {fileID: 942199278}
   _camera: {fileID: 519420031}
-  _target: {fileID: 1438927892}
+  _target: {fileID: 106137556}
   _targetZoom: 4
 --- !u!225 &191631022
 CanvasGroup:
@@ -1757,11 +1757,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1438927892 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9149800807061735130, guid: 011815b4209a5a8469db345d34fcfe80, type: 3}
-  m_PrefabInstance: {fileID: 9149800807820626638}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1454225451
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,6 +3701,10 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 41d5ea49f06070f48bb015d664a5cd37, type: 3}
     - target: {fileID: 9149800806532619911, guid: 011815b4209a5a8469db345d34fcfe80, type: 3}
       propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9149800806532619912, guid: 011815b4209a5a8469db345d34fcfe80, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9149800806532619913, guid: 011815b4209a5a8469db345d34fcfe80, type: 3}

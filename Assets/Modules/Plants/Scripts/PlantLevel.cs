@@ -19,7 +19,7 @@ namespace Modules.Plants.Scripts
         public void Die()
         {
             if (_animator != null)
-                _animator.gameObject.SetActive(false);
+                _animator.enabled = false;
             _spriteRenderer.sprite = _dead;
         }
     }
